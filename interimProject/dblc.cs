@@ -21,7 +21,7 @@ namespace interimProject
                 System.Console.WriteLine("Ooops, troubles with connection!!!");
             } 
         }
-        // public void Selection()
+        // public void Select()
         // {
         //     string commandText = "Select * from Register";
         //     SqlCommand command = new SqlCommand(commandText, conForLc);
@@ -42,20 +42,21 @@ namespace interimProject
         //         System.Console.WriteLine("Insert command successfull!!!");
         //     }
         // }
-        public void AdminInsert (string aLastName, string aFirstName, string aMiddleName, string aLogin, string aPassportID, string aSystemPassword )
+        public void AdminInsert (string aLastName, string aFirstName, string aLogin, string aPassportID, string aGender, string aBirthDate, string aCitizenship, string aSystemPassword )
         {
-            string insertingSqlCommand = string.Format($"insert into Register([Lastname],[FirstName],[MiddleName], [login], [role], [PassportID],[SystemPasword]) values ('{aLastName}','{aFirstName}', '{aMiddleName}','{aLogin}','Admin','{aPassportID}','{aSystemPassword}')");
+            string insertingSqlCommand = string.Format($"insert into Register([Lastname],[FirstName], [login], [role], [PassportID],[Gender], [BirthDate], [Citizenship], [SystemPassword]) values ('{aLastName}','{aFirstName}','{aLogin}','Admin','{aPassportID}', '{aGender}', '{aBirthDate}', '{aCitizenship}','{aSystemPassword}')");
             
             SqlCommand command = new SqlCommand(insertingSqlCommand,conForLc);
             var result = command.ExecuteNonQuery();
             if (result > 0)
             {
+                Console.Clear();
                 System.Console.WriteLine("successfully registered!");
             }
         }
-        public void ClientInsert (string cLastName, string cFirstName, string cMiddleName, string cLogin, string cPassportID, string cSystemPassword )
+        public void ClientInsert (string cLastName, string cFirstName, string cLogin, string cPassportID, string cGender, string cBirthDate, string cCitizenship, string cSystemPassword )
         {
-            string insertingSqlCommand = string.Format($"insert into Register([Lastname],[FirstName],[MiddleName], [login], [role], [PassportID],[SystemPasword]) values ('{cLastName}','{cFirstName}', '{cMiddleName}','{cLogin}','Client','{cPassportID}','{cSystemPassword}')");
+            string insertingSqlCommand = string.Format($"insert into Register([Lastname],[FirstName], [login], [role], [PassportID],[Gender], [BirthDate], [Citizenship], [SystemPassword]) values ('{cLastName}','{cFirstName}','{cLogin}','Client','{cPassportID}', '{cGender}', '{cBirthDate}', '{cCitizenship}','{cSystemPassword}')");
             
             SqlCommand command = new SqlCommand(insertingSqlCommand,conForLc);
             var result = command.ExecuteNonQuery();
@@ -81,11 +82,18 @@ namespace interimProject
             SqlDataReader readerForChecking = checking.ExecuteReader();
             while (readerForChecking.Read())
             {
-                if (inputLogin == readerForChecking.GetValue(4).ToString() && inputSystemPassword == readerForChecking.GetValue(7).ToString())
+                if (inputLogin == readerForChecking.GetValue(3).ToString() && inputSystemPassword == readerForChecking.GetValue(10).ToString())
                 {
                     System.Console.WriteLine($"wellcome, {readerForChecking.GetValue(2).ToString()}");
+                } else {
+                    System.Console.WriteLine("Incorrect login or password!!!");
                 }
             }
+        }
+        public void Instruction()
+        {
+         System.Console.WriteLine("Welcome to your personal account!");
+         System.Console.WriteLine("Push *1* --> to apply for a loan\nPush *2*--> to view your personal details\nPush *3* --> to contact admin");   
         }
 
     }
