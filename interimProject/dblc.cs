@@ -42,15 +42,26 @@ namespace interimProject
         //         System.Console.WriteLine("Insert command successfull!!!");
         //     }
         // }
-        public void AdminInsert (string lastName, string firstName, string middleName, string login, string passportID, string systempassword )
+        public void AdminInsert (string aLastName, string aFirstName, string aMiddleName, string aLogin, string aPassportID, string aSystemPassword )
         {
-            string insertingSqlCommand = string.Format($"insert into Register([Lastname],[FirstName],[MiddleName], [login], [role], [PassportID],[SystemPasword]) values ('{lastName}','{firstName}', '{middleName}','{login}','Admin','{passportID}','{systempassword}')");
+            string insertingSqlCommand = string.Format($"insert into Register([Lastname],[FirstName],[MiddleName], [login], [role], [PassportID],[SystemPasword]) values ('{aLastName}','{aFirstName}', '{aMiddleName}','{aLogin}','Admin','{aPassportID}','{aSystemPassword}')");
             
             SqlCommand command = new SqlCommand(insertingSqlCommand,conForLc);
             var result = command.ExecuteNonQuery();
             if (result > 0)
             {
-                System.Console.WriteLine("Insert command successfull!!!");
+                System.Console.WriteLine("successfully registered!");
+            }
+        }
+        public void ClientInsert (string cLastName, string cFirstName, string cMiddleName, string cLogin, string cPassportID, string cSystemPassword )
+        {
+            string insertingSqlCommand = string.Format($"insert into Register([Lastname],[FirstName],[MiddleName], [login], [role], [PassportID],[SystemPasword]) values ('{cLastName}','{cFirstName}', '{cMiddleName}','{cLogin}','Client','{cPassportID}','{cSystemPassword}')");
+            
+            SqlCommand command = new SqlCommand(insertingSqlCommand,conForLc);
+            var result = command.ExecuteNonQuery();
+            if (result > 0)
+            {
+                System.Console.WriteLine("successfully registered!");
             }
         }
         // public void SelectionById(int idselect)
@@ -63,5 +74,6 @@ namespace interimProject
         //         System.Console.WriteLine($"ID:{reader.GetValue(0)}\nLast Name:{reader.GetValue(1)}\nFirst Name:{reader.GetValue(2)}\nMiddle Name:{reader.GetValue(3)}");
         //     }
         // }
+
     }
 }
