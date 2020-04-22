@@ -74,6 +74,19 @@ namespace interimProject
         //         System.Console.WriteLine($"ID:{reader.GetValue(0)}\nLast Name:{reader.GetValue(1)}\nFirst Name:{reader.GetValue(2)}\nMiddle Name:{reader.GetValue(3)}");
         //     }
         // }
+        public void Checkingidentity(string inputLogin, string inputSystemPassword)
+        {
+            string checkingcommand = string.Format($"select * from Register");
+            SqlCommand checking = new SqlCommand(checkingcommand, conForLc);
+            SqlDataReader readerForChecking = checking.ExecuteReader();
+            while (readerForChecking.Read())
+            {
+                if (inputLogin == readerForChecking.GetValue(4).ToString() && inputSystemPassword == readerForChecking.GetValue(7).ToString())
+                {
+                    System.Console.WriteLine($"wellcome, {readerForChecking.GetValue(2).ToString()}");
+                }
+            }
+        }
 
     }
 }

@@ -9,21 +9,22 @@ namespace interimProject
         static void Main(string[] args)
         {
             Dblc register = new Dblc();
+            string AlifFamilyPassword ="29-04-2014";
             register.OpenConnection();
             //register.CheckingConnection();
             Console.WriteLine("Push *1* --> to Log In\nPush *2* --> to Sign Up");
             int directory = int.Parse(Console.ReadLine());
             switch (directory)
             {
-            //     case 1: 
-            //         System.Console.WriteLine("*this inscription is visible only to members of the Alif family!*\npassword for admins:29-04-2014");
-            //         Console.ReadKey();
-            //         Console.Clear();
-            //         System.Console.WriteLine("Are you a part of Alif-Family?\nPush *1*--> if you work in a bank\nPush *2*--> if you are not a Alif-bank employee");
-            // int choise1 = int.Parse(Console.ReadLine());
-            //     break;
+                case 1: 
+                System.Console.WriteLine("Enter your phone number: ");
+                string inputLogin = Console.ReadLine();
+                System.Console.WriteLine("Enter system-password: ");
+                string inputSystemPassword = Console.ReadLine();
+                register.Checkingidentity(inputLogin, inputSystemPassword);
+
+                break;
                 case 2:  // register case
-                    string AlifFamilyPassword ="29-04-2014";
                     lie:
                     System.Console.WriteLine("Are you a part of Alif-Family?\nPush *1*--> if you are an Alif-bank employee\nPush *2*--> if you are not an Alif-bank employee");
                     int choise2 = int.Parse(Console.ReadLine());
@@ -42,10 +43,12 @@ namespace interimProject
                             string aLogin = Console.ReadLine();
                             System.Console.WriteLine("Enter your PassportID: ");
                             string aPassportID = Console.ReadLine();
-                            System.Console.WriteLine("Create system-password (10 item max):");
+                            System.Console.WriteLine("Create system-password:");
                             string aSystemPassword = Console.ReadLine();
                             register.AdminInsert(aLastName,aFirstName, aMiddleName, aLogin, aPassportID, aSystemPassword);
+                            goto secondMenu;
                         } else{
+                            Console.Clear();
                             System.Console.WriteLine("Error password!");
                             goto lie;
                         }
@@ -61,15 +64,17 @@ namespace interimProject
                             string cLogin = Console.ReadLine();
                             System.Console.WriteLine("Enter your PassportID: ");
                             string cPassportID = Console.ReadLine();
-                            System.Console.WriteLine("Create system-password (10 item max):");
+                            System.Console.WriteLine("Create system-password:");
                             string cSystemPassword = Console.ReadLine();
                             register.ClientInsert(cLastName,cFirstName, cMiddleName, cLogin, cPassportID, cSystemPassword);
-
-                    }
-                               
-                break;
-
+                             }
+                    goto secondMenu;
             }
+            secondMenu:
+            System.Console.WriteLine(" ");
+
+
+
         }
     }
 }
