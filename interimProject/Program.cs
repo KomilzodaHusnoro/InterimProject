@@ -69,6 +69,7 @@ namespace interimProject
                             System.Console.WriteLine("Create system-password:");
                             string aSystemPassword = Console.ReadLine();
                             register.AdminInsert(aLastName,aFirstName, aMiddleName, aLogin, aPassportID, aSystemPassword);
+                            goto PAMenuForAdmins;
                         } else{
                             Console.Clear();
                             System.Console.WriteLine("Error password!");
@@ -89,15 +90,17 @@ namespace interimProject
                             System.Console.WriteLine("Create system-password:");
                             string cSystemPassword = Console.ReadLine();
                             register.ClientInsert(cLastName,cFirstName, cMiddleName, cLogin, cPassportID, cSystemPassword);
-                             }
-                    goto PAMenuForClient;
+                            goto PAMenuForClient;
+                                }
+                default: System.Console.WriteLine("Error choise!"); 
+                Console.ReadKey();
+                goto firstMenu;      
             }
             PAMenuForClient:
-            System.Console.WriteLine(" hello! ");
-
-            
+            CMenu Client = new CMenu();
+            Client.Instruction();
             PAMenuForAdmins:
-            System.Console.WriteLine(" ghjk ");
+            System.Console.WriteLine("Hello!");
 
 
 
