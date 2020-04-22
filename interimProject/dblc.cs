@@ -21,19 +21,30 @@ namespace interimProject
                 System.Console.WriteLine("Ooops, troubles with connection!!!");
             } 
         }
-        public void Selection()
+        // public void Selection()
+        // {
+        //     string commandText = "Select * from Register";
+        //     SqlCommand command = new SqlCommand(commandText, conForLc);
+        //     SqlDataReader reader = command.ExecuteReader();
+        //     while (reader.Read())
+        //     {
+        //         System.Console.WriteLine($"ID:{reader.GetValue(0)}\nLast Name:{reader.GetValue(1)}\nFirst Name:{reader.GetValue(2)}\nMiddle Name:{reader.GetValue(3)}\nBirth Date:{reader.GetValue(4)}");
+        //     } 
+        // }
+        // public void clientInsert (string lastName, string firstName, string middleName)
+        // {
+        //     string insertingSqlCommand = string.Format($"insert into Person([Last_Name],[First_Name],[Middle_Name]) values ('{lastName}','{firstName}','{middleName}')");
+            
+        //     SqlCommand command = new SqlCommand(insertingSqlCommand,conForLc);
+        //     var result = command.ExecuteNonQuery();
+        //     if (result > 0)
+        //     {
+        //         System.Console.WriteLine("Insert command successfull!!!");
+        //     }
+        // }
+        public void AdminInsert (string lastName, string firstName, string middleName, string login, string passportID, string systempassword )
         {
-            string commandText = "Select * from Person";
-            SqlCommand command = new SqlCommand(commandText, conForLc);
-            SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                System.Console.WriteLine($"ID:{reader.GetValue(0)}\nLast Name:{reader.GetValue(1)}\nFirst Name:{reader.GetValue(2)}\nMiddle Name:{reader.GetValue(3)}\nBirth Date:{reader.GetValue(4)}");
-            } 
-        }
-        public void Insert (string lastName, string firstName, string middleName, string dateOfBirth)
-        {
-            string insertingSqlCommand = string.Format($"insert into Person([Last_Name],[First_Name],[Middle_Name], [Birth_date]) values ('{lastName}','{firstName}','{middleName}', '{dateOfBirth}')");
+            string insertingSqlCommand = string.Format($"insert into Register([Lastname],[FirstName],[MiddleName], [login], [role], [PassportID],[SystemPasword]) values ('{lastName}','{firstName}', '{middleName}','{login}','Admin','{passportID}','{systempassword}')");
             
             SqlCommand command = new SqlCommand(insertingSqlCommand,conForLc);
             var result = command.ExecuteNonQuery();
@@ -42,40 +53,15 @@ namespace interimProject
                 System.Console.WriteLine("Insert command successfull!!!");
             }
         }
-        public void SelectionById(int idselect)
-        {
-            string SelectionByIdCommand = string.Format($"select * from Person where Id = {idselect}");
-            SqlCommand command = new SqlCommand(SelectionByIdCommand, conForLc);
-            SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                System.Console.WriteLine($"ID:{reader.GetValue(0)}\nLast Name:{reader.GetValue(1)}\nFirst Name:{reader.GetValue(2)}\nMiddle Name:{reader.GetValue(3)}");
-            }
-        }
-        public void UpdateById(int inputId, string lastName2, string firstName2, string middleName2, string dateOfBirth2)
-        {
-            string updateIdCommand = string.Format($"update Person set Last_Name = '{lastName2}',First_Name ='{firstName2}',Middle_Name ='{middleName2}',Birth_Date = '{dateOfBirth2}' where Id = {inputId}");
-            SqlCommand command = new SqlCommand(updateIdCommand, conForLc);
-            var result = command.ExecuteNonQuery();
-
-            if(result > 0)
-            {
-               System.Console.WriteLine($"Updated Person with {inputId} Id!"); 
-            }else{
-                System.Console.WriteLine($"There is no ID like {inputId}!!");
-            }
-        }
-        public void DeleteId (int deleteId)
-        {
-            string deleteIdCommand = string.Format($"delete Person where Id = {deleteId}");
-            SqlCommand command = new SqlCommand(deleteIdCommand, conForLc);
-            var result = command.ExecuteNonQuery();
-            if(result > 0)
-            {
-               System.Console.WriteLine($"ID {deleteId} was deleted"); 
-            }else{
-                System.Console.WriteLine($"There is no {deleteId} ID!");
-            }
-        }
+        // public void SelectionById(int idselect)
+        // {
+        //     string SelectionByIdCommand = string.Format($"select * from Register where Id = {idselect}");
+        //     SqlCommand command = new SqlCommand(SelectionByIdCommand, conForLc);
+        //     SqlDataReader reader = command.ExecuteReader();
+        //     while (reader.Read())
+        //     {
+        //         System.Console.WriteLine($"ID:{reader.GetValue(0)}\nLast Name:{reader.GetValue(1)}\nFirst Name:{reader.GetValue(2)}\nMiddle Name:{reader.GetValue(3)}");
+        //     }
+        // }
     }
 }
