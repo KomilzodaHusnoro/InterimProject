@@ -54,7 +54,7 @@ namespace interimProject
         // }
         public void AdminInsert (string aLastName, string aFirstName, string aLogin, string aPassportID, string aGender, int aBirthDate, string aCitizenship, string aSystemPassword )
         {
-            string insertingSqlCommand = string.Format($"insert into Register([Lastname],[FirstName], [login], [role], [PassportID],[Gender], [BirthDate], [Citizenship], [SystemPassword]) values ('{aLastName}','{aFirstName}','{aLogin}','Admin','{aPassportID}', '{aGender}', {aBirthDate}, '{aCitizenship}','{aSystemPassword}')");
+            string insertingSqlCommand = string.Format($"insert into Register([Lastname],[FirstName], [login], [role], [PassportID],[Gender], [BirthDate], [Citizenship], [SystemPassword]) values ('{aLastName}','{aFirstName}', '{aLogin}','Admin','{aPassportID}', '{aGender}', {aBirthDate}, '{aCitizenship}','{aSystemPassword}')");
             
             SqlCommand command = new SqlCommand(insertingSqlCommand,conForLc);
             var result = command.ExecuteNonQuery();
@@ -66,7 +66,7 @@ namespace interimProject
         }
         public void ClientInsert (string cLastName, string cFirstName, string cLogin, string cPassportID, string cGender, int cBirthDate, string cMaritalStatus, string cCitizenship, string cSystemPassword, int points )
         {
-            string insertingSqlCommand = string.Format($"insert into Register([Lastname],[FirstName], [login], [role], [PassportID],[Gender], [MaritalStatus], [BirthDate], [Citizenship], [SystemPassword], [defaultPoint]) values ('{cLastName}','{cFirstName}','{cLogin}','Client','{cPassportID}', '{cGender}', '{cMaritalStatus}', {cBirthDate}, '{cCitizenship}','{cSystemPassword}', {points})");
+            string insertingSqlCommand = string.Format($"insert into Register([Lastname],[FirstName], [login], [role], [PassportID],[Gender], [MaritalStatus], [BirthDate], [Citizenship], [SystemPassword], [defaultPoint]) values ('{cLastName}','{cFirstName}','{cLogin}'','Client','{cPassportID}', '{cGender}', '{cMaritalStatus}', {cBirthDate}, '{cCitizenship}','{cSystemPassword}', {points})");
             
             SqlCommand command = new SqlCommand(insertingSqlCommand,conForLc);
             var result = command.ExecuteNonQuery();
@@ -88,11 +88,25 @@ namespace interimProject
                 }
             }
         }
-        public void Instruction()
-        {
-         System.Console.WriteLine("Welcome to your personal account!");
-         System.Console.WriteLine("Push *1* --> to apply for a loan\nPush *2*--> to view your personal details\nPush *3* --> to contact admin");   
-        }
+    }
+    class CreditHistory
+    {
 
+    }
+    class AplicationHistory 
+    {
+        const string conS = @"Data Source= localhost; Initial Catalog = LoanCalculator; user id= sa; password=Root123.";
+        SqlConnection conForLc = new SqlConnection(conS);
+       public void AddAplication(int purpose, int creditAmoung, int salary, int term) 
+       {
+           string insertingSqlCommand = string.Format($"insert into Aplication ([Purpose],[Salary], [term], [creditAmoung]) values ({purpose}, {salary}, {term}, {creditAmoung})");
+            
+            SqlCommand command = new SqlCommand(insertingSqlCommand,conForLc);
+            var result = command.ExecuteNonQuery();
+            if (result > 0)
+            {
+                System.Console.WriteLine("successfully registered!");
+            }
+       }
     }
 }
