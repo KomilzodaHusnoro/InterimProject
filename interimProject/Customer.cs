@@ -61,7 +61,7 @@ namespace interimProject
             var result = command.ExecuteNonQuery();
             if (result > 0)
             {
-                System.Console.WriteLine("successfully registered!");
+                System.Console.WriteLine($"successfully registered!\n Wellcome!");
             }
         }
         

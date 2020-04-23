@@ -88,12 +88,16 @@ namespace interimProject
                     
 
             MenuForClient:
-            System.Console.WriteLine("Welcome to your personal account!");
+            System.Console.WriteLine("Here is your personal account!");
             System.Console.WriteLine("Push *1* --> to apply for a loan\nPush *2*--> to view your personal details\nPush *3* --> to contact admin");
             int cchoise = int.Parse(Console.ReadLine());
             switch (cchoise)
             {
                 case 1:
+                    Aplication aplication = new Aplication();
+                    System.Console.Write("Verify your identity! Enter login: ");
+                    string login = Console.ReadLine();
+                    aplication.Calculator(login);
 
 
                     break;
