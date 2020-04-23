@@ -38,6 +38,7 @@ namespace interimProject
             System.Console.Write($"Create system-password: ");
             cSystemPassword = Console.ReadLine();
         }
+        public 
         const string conS = @"Data Source= localhost; Initial Catalog = LoanCalculator; user id= sa; password=Root123.";
         SqlConnection conForLc = new SqlConnection(conS);
         public void ClientInsert ()
