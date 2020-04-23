@@ -52,18 +52,7 @@ namespace interimProject
         //         System.Console.WriteLine("Insert command successfull!!!");
         //     }
         // }
-        public void AdminInsert (string aLastName, string aFirstName, string aLogin, string aPassportID, string aGender, int aBirthDate, string aCitizenship, string aSystemPassword )
-        {
-            string insertingSqlCommand = string.Format($"insert into Register([Lastname],[FirstName], [login], [role], [PassportID],[Gender], [BirthDate], [Citizenship], [SystemPassword]) values ('{aLastName}','{aFirstName}', '{aLogin}','Admin','{aPassportID}', '{aGender}', {aBirthDate}, '{aCitizenship}','{aSystemPassword}')");
-            
-            SqlCommand command = new SqlCommand(insertingSqlCommand,conForLc);
-            var result = command.ExecuteNonQuery();
-            if (result > 0)
-            {
-                Console.Clear();
-                System.Console.WriteLine("successfully registered!");
-            }
-        }
+        
         
         public void Checkingidentity(string inputLogin, string inputSystemPassword)
         {
