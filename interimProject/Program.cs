@@ -67,7 +67,7 @@ namespace interimProject
                         {
                             System.Console.WriteLine("Confirmed!");
                             Admin admin = new Admin();
-                            admin.AdminInsert();   
+                            admin.AdminInsert();
                             goto MenuForAdmins;
                         }
                         else
@@ -77,39 +77,38 @@ namespace interimProject
                             goto lie;
                         }
                     }
-                    else if (choise3 == 2 )
+                    else if (choise3 == 2)
                     {
                         Customer customer = new Customer();
                         customer.ClientInsert();
                         goto MenuForClient;
                     }
-                break;
+                    break;
             }
-                    
 
-            MenuForClient:
+
+        MenuForClient:
             System.Console.WriteLine("Here is your personal account!");
             System.Console.WriteLine("Push *1* --> to apply for a loan\nPush *2*--> to view your personal details\nPush *3* --> to contact admin");
             int cchoise = int.Parse(Console.ReadLine());
             switch (cchoise)
             {
                 case 1:
-                    Aplication aplication = new Aplication();
                     System.Console.Write("Verify your identity! Enter login: ");
                     string login = Console.ReadLine();
-                    aplication.Calculator(login);
-
-
+                    Application application = new Application();
+                    application.Calculator(login);
+                    application.Insert();
                     break;
             }
-                        
-                        
-                        
-                                               
-                        
-                        
+
+
+
+
+
+
         MenuForAdmins:
-        System.Console.WriteLine("");
+            System.Console.WriteLine("");
         }
     }
 }
