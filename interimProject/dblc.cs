@@ -64,17 +64,7 @@ namespace interimProject
                 System.Console.WriteLine("successfully registered!");
             }
         }
-        public void ClientInsert (string cLastName, string cFirstName, string cLogin, string cPassportID, string cGender, int cBirthDate, string cMaritalStatus, string cCitizenship, string cSystemPassword, int points )
-        {
-            string insertingSqlCommand = string.Format($"insert into Register([Lastname],[FirstName], [login], [role], [PassportID],[Gender], [MaritalStatus], [BirthDate], [Citizenship], [SystemPassword], [defaultPoint]) values ('{cLastName}','{cFirstName}','{cLogin}'','Client','{cPassportID}', '{cGender}', '{cMaritalStatus}', {cBirthDate}, '{cCitizenship}','{cSystemPassword}', {points})");
-            
-            SqlCommand command = new SqlCommand(insertingSqlCommand,conForLc);
-            var result = command.ExecuteNonQuery();
-            if (result > 0)
-            {
-                System.Console.WriteLine("successfully registered!");
-            }
-        }
+        
         public void Checkingidentity(string inputLogin, string inputSystemPassword)
         {
             string checkingcommand = string.Format($"select * from Register");
