@@ -8,8 +8,9 @@ namespace interimProject
     {
         static void Main(string[] args)
         {
-            Dblc register = new Dblc();
+            int points = 0;
             string AlifFamilyPassword ="29-04-2014";
+            DbRegister register = new DbRegister();
             register.OpenConnection();
             //register.CheckingConnection();
             firstMenu:
@@ -37,12 +38,12 @@ namespace interimProject
                                 goto lie1;
                             }
                     } else if (choise2 == 2) {
-                        System.Console.WriteLine("You will be registered as a regular user!");
+                        System.Console.WriteLine("You will log in as a regular user!");
                         System.Console.Write("Enter your phone number: ");
                         string inputLogin = Console.ReadLine();
                         System.Console.Write("Enter system-password: ");
                         string inputSystemPassword = Console.ReadLine();
-                        register.Checkingidentity(inputLogin, inputSystemPassword);
+                       // register.Checkingidentity(inputLogin, inputSystemPassword);
                         goto PAMenuForClient;
                     } else {
                         goto firstMenu;
@@ -64,12 +65,12 @@ namespace interimProject
                             string aLogin = Console.ReadLine();
                             System.Console.Write("Enter your PassportID: ");
                             string aPassportID = Console.ReadLine();
-                            System.Console.WriteLine("Enter your gender:\n-->man\n-->woman\n-->did not deside");
+                            System.Console.WriteLine("Enter your gender:\n-->man\n-->woman\n-->did not decide");
                             string aGender = Console.ReadLine().ToLower();
                             System.Console.WriteLine("what is your citizenship?");
                             string aCitizenship = Console.ReadLine().ToUpper(); 
-                            System.Console.Write("Enter your Birth Date (YYYY.MM.DD): ");
-                            string aBirthDate = Console.ReadLine();
+                            System.Console.Write("Enter your Birth Date (YYYY): ");
+                            int aBirthDate = int.Parse(Console.ReadLine());
                             System.Console.Write("Create system-password:");
                             string aSystemPassword = Console.ReadLine();
                             register.AdminInsert(aLastName,aFirstName, aLogin, aPassportID, aGender, aBirthDate, aCitizenship, aSystemPassword);
@@ -89,15 +90,26 @@ namespace interimProject
                             string cLogin = Console.ReadLine();
                             System.Console.Write("Enter your PassportID: ");
                             string cPassportID = Console.ReadLine();
-                            System.Console.WriteLine("Enter your gender:\n-->man\n-->woman-->");
+                            System.Console.WriteLine("Enter your gender:\n-->man\n-->woman\n-->did not decide");
                             string cGender = Console.ReadLine().ToLower();
+                            if (cGender == "man"){points+=1;} else if (cGender == "woman"){points+=2;}
+                            System.Console.WriteLine("Your Merital Status:\n-->single\n-->married\n-->divorced\n-->widower");
+                            string cMaritalStatus = Console.ReadLine().ToLower();
+                            if (cMaritalStatus == "single"){points+=1;}
+                            else if (cMaritalStatus == "married"){points+=2;}
+                            else if (cMaritalStatus == "divorced"){points+=1;}
+                            else if (cMaritalStatus == "widover"){points+=2;}
                             System.Console.WriteLine("what is your citizenship?");
-                            string cCitizenship = Console.ReadLine().ToUpper(); 
-                            System.Console.Write("Enter your Birth Date (YYYY.MM.DD): ");
-                            string cBirthDate = Console.ReadLine();
-                            System.Console.Write("Create system-password:");
+                            string cCitizenship = Console.ReadLine().ToUpper();
+                            if (cCitizenship == "TAJIKISTAN"){points++;}
+                            System.Console.Write("Enter your Birth Date (YYYY): ");
+                            int cBirthDate = int.Parse(Console.ReadLine());
+                            if (2020 - cBirthDate > 25 && 2020 - cBirthDate < 36) {points+=1;}
+                            else if (2020 - cBirthDate > 35 && 2020 - cBirthDate < 63) {points+=2;}
+                            else if (2020 - cBirthDate >= 63) {points+=1;}
+                            System.Console.Write($"Create system-password:{points}");
                             string cSystemPassword = Console.ReadLine();
-                            register.AdminInsert(cLastName,cFirstName, cLogin, cPassportID, cGender, cBirthDate, cCitizenship, cSystemPassword);
+                            register.ClientInsert(cLastName,cFirstName, cLogin, cPassportID, cGender, cBirthDate, cMaritalStatus, cCitizenship, cSystemPassword, points);
                             goto PAMenuForClient;
                                 }
                 default: System.Console.WriteLine("Error choise!"); 
@@ -112,13 +124,8 @@ namespace interimProject
             {
                 case 1:
                 System.Console.WriteLine("To apply for a loan, you must fill out the fields!");
-                System.Console.WriteLine("Your Merital Status:\n-->single\n-->family man\n-->divorced\n-->widower/widow");
-                string meritalStatus = Console.ReadLine().ToLower();
-                System.Console.Write("Enter your age: ");
-                string BirthDate = Console.ReadLine();
-                System.Console.WriteLine("what is your citizenship?");
-                string citizenship = Console.ReadLine().ToUpper();
-                System.Console.WriteLine("");
+                System.Console.WriteLine("authentication!!!\nEnter your password again:");
+                
 
 
                 
@@ -126,12 +133,7 @@ namespace interimProject
             }
 
             PAMenuForAdmins:
-            System.Console.WriteLine("Hello!");
-            // System.Console.WriteLine("Your Merital Status:\n-->single\n-->family man\n-->divorced\n-->widower/widow");
-            //                 string aMeritalStatus = Console.ReadLine().ToLower();
-
-
-            
+            System.Console.WriteLine("Hello!");            
         }
     }
 }
