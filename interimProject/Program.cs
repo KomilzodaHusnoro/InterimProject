@@ -145,7 +145,7 @@ namespace interimProject
             switch (adminChoise)
             {
                 case 1:
-                    
+                    register.Select();
                 goto MenuForAdmins;
             }
         }

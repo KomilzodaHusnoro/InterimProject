@@ -23,17 +23,16 @@ namespace interimProject
                 System.Console.WriteLine("Ooops, troubles with connection!!!");
             }
         }
-
-        // public void Select()
-        // {
-        //     string commandText = "Select * from Register";
-        //     SqlCommand command = new SqlCommand(commandText, conForLc);
-        //     SqlDataReader reader = command.ExecuteReader();
-        //     while (reader.Read())
-        //     {
-        //         System.Console.WriteLine($"ID:{reader.GetValue(0)}\nLast Name:{reader.GetValue(1)}\nFirst Name:{reader.GetValue(2)}\nMiddle Name:{reader.GetValue(3)}\nBirth Date:{reader.GetValue(4)}");
-        //     } 
-        // }
+        public void Select()
+        {
+            string commandText = "Select * from Register";
+            SqlCommand command = new SqlCommand(commandText, conForLc);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                System.Console.WriteLine($"ID:{reader.GetValue(0)}\nLast Name:{reader.GetValue(1)}\nFirst Name:{reader.GetValue(2)}\nLogin:{reader.GetValue(3)}\nRole:{reader.GetValue(4)}PassportID:{reader.GetValue(5)}\nGender:{reader.GetValue(6)}\nMarital status:{reader.GetValue(7)}\nBirth Date:{reader.GetValue(8)}\nCitizenship:{reader.GetValue(9)}\nSystemPassword:{reader.GetValue(10)}\ndefaultPoint:{reader.GetValue(11)}");
+            }
+        }
         // public void clientInsert (string lastName, string firstName, string middleName)
         // {
         //     string insertingSqlCommand = string.Format($"insert into Person([Last_Name],[First_Name],[Middle_Name]) values ('{lastName}','{firstName}','{middleName}')");
@@ -56,7 +55,10 @@ namespace interimProject
                 {
                     System.Console.WriteLine($"wellcome, {readerForChecking.GetValue(2).ToString()}");
                 }
-                else { System.Console.WriteLine("Incorrect Login or systempassword!!!"); }
+                else if (inputLogin == readerForChecking.GetValue(3).ToString() && inputSystemPassword != readerForChecking.GetValue(10).ToString())
+                {
+                    System.Console.WriteLine("Incorrect Login or systempassword!!!");
+                    }
             }
             readerForChecking.Close();
         }
