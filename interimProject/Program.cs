@@ -98,12 +98,13 @@ namespace interimProject
             {
                 case 1:
                     Application application = new Application();
-                    if( application.Calculator(login))
-                    {
-                        Graphic graphic = new Graphic();
-                        graphic.BuildGraphic(application.creditAmoung,application.term,login);
-                    }
-                    break;
+                    application.Calculator(login);
+                    // if( application.Calculator(login))
+                    // {
+                    //     Graphic graphic = new Graphic();
+                    //     graphic.BuildGraphic(application.creditAmoung,application.term,login);
+                    // }
+                    goto MenuForClient;
                 case 2:
                     internalMenu:
                     System.Console.Write("Push *1* --> view personal details\nPush *2* --> view an application history\nPush *3* -->view a credit history\nPush *4*--> to exit\nYour choise: ");
@@ -129,17 +130,15 @@ namespace interimProject
                             register.SelectionByLoginFromCreditHistory(login);
                             Console.ReadKey();
                             goto internalMenu;
-                        case 4:
-                            goto internalMenu;                        
+                        default:
+                            goto MenuForClient;                      
                     }
-                    break;
                 case 3:
                     SendMassage newMassage = new SendMassage(login);
                     newMassage.massageInsert();
                 break;
 
             }
-
         MenuForAdmins:
             System.Console.WriteLine("*1*--> view all Client\n*2*-->view all applications\n*3*-->view all credit history\n*4*-->add client\n*5*-->edit info");
             int adminChoise = int.Parse(Console.ReadLine());
