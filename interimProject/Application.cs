@@ -91,6 +91,10 @@ namespace interimProject
                 SqlCommand command = new SqlCommand(insertingSqlCommand, conForLc);
                 var result = command.ExecuteNonQuery();
                 System.Console.WriteLine("Credit approved for you!");
+                DateTime todayDay = DateTime.Today;
+                string insertIntoCreditHistory = string.Format($"insert into CreditHistory ([login],[Purpose],[CreditAmoung],[term],[delay],[OpeningDate],[CreditRest],[status])values ('{login}','{Purpose}',{creditAmoung},{term},0,'{todayDay}',{creditAmoung},'open')");
+                SqlCommand creditHistoryCommand = new SqlCommand(insertIntoCreditHistory, conForLc);
+                var result2 = command.ExecuteNonQuery();
                 Console.ReadKey();
                 return true;
             }

@@ -51,17 +51,6 @@ namespace interimProject
             }
             reader1.Close();
         }
-        // public void clientInsert (string lastName, string firstName, string middleName)
-        // {
-        //     string insertingSqlCommand = string.Format($"insert into Person([Last_Name],[First_Name],[Middle_Name]) values ('{lastName}','{firstName}','{middleName}')");
-
-        //     SqlCommand command = new SqlCommand(insertingSqlCommand,conForLc);
-        //     var result = command.ExecuteNonQuery();
-        //     if (result > 0)
-        //     {
-        //         System.Console.WriteLine("Insert command successfull!!!");
-        //     }
-        // }
         public void Checkingidentity(string inputLogin, string inputSystemPassword)
         {
             string checkingcommand = string.Format($"select * from Register");
