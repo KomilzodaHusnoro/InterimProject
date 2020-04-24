@@ -98,11 +98,15 @@ namespace interimProject
             {
                 case 1:
                     Application application = new Application();
-                    application.Calculator(login);
+                    if( application.Calculator(login))
+                    {
+                        Graphic graphic = new Graphic();
+                        graphic.BuildGraphic(application.creditAmoung,application.term,login);
+                    }
                     break;
                 case 2:
                     internalMenu:
-                    System.Console.Write("Push *1* --> view personal details\nPush *2* --> view an application history\nPush *3* -->view a credit history\nPush *4*--> построить график погашений\nPush *5*--> to exit\nYour choise: ");
+                    System.Console.Write("Push *1* --> view personal details\nPush *2* --> view an application history\nPush *3* -->view a credit history\nPush *4*--> to exit\nYour choise: ");
                     int choise = int.Parse(Console.ReadLine());
                     switch (choise)
                     {
@@ -126,12 +130,12 @@ namespace interimProject
                             Console.ReadKey();
                             goto internalMenu;
                         case 4:
-                        break;
-                        case 5: 
                             goto internalMenu;                        
                     }
                     break;
                 case 3:
+                    SendMassage newMassage = new SendMassage(login);
+                    newMassage.massageInsert();
                 break;
 
             }

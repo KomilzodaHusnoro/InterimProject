@@ -6,11 +6,11 @@ namespace interimProject
 {
     class Application
     {
-        string login { get; set; }
+        public string login { get; set; }
         string Purpose { get; set; }
         int Salary { get; set; }
-        int term { get; set; }
-        int creditAmoung { get; set; }
+        public int term { get; set; }
+        public int creditAmoung { get; set; }
         const string conS = @"Data Source= localhost; Initial Catalog = LoanCalculator; user id= sa; password=Root123.";
         SqlConnection conForLc = new SqlConnection(conS);
         public bool Calculator(string login)

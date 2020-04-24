@@ -9,11 +9,16 @@ namespace interimProject
         public string login { get; set; }
         public string company { get; set; }
         public string massage {get; set; }
-        public SendMassage()
+        public SendMassage(string login)
 
         {
+            this.login=login;
+            System.Console.Write("Enter company name, which you want to send massage:");
+            string company = Console.ReadLine().ToUpper();
+            this.company = company;
             System.Console.WriteLine("*You can write your massage here*");
             string massage = Console.ReadLine();
+            this.massage = massage;            
         }
         const string conS = @"Data Source= localhost; Initial Catalog = LoanCalculator; user id= sa; password=Root123.";
         SqlConnection conForLc = new SqlConnection(conS);
@@ -27,7 +32,7 @@ namespace interimProject
             Console.Clear();
             if (result > 0)
             {
-                System.Console.WriteLine($"Successfully registered!\n Wellcome!");
+                System.Console.WriteLine($"Your massage was successfully registered!\n Wellcome!");
             }
         }
 
