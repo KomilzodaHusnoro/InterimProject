@@ -42,12 +42,12 @@ namespace interimProject
         }
         public void SelectFromCreditHistory()
         {
-            string commandText = "Select * from Application";
+            string commandText = "Select * from CreditHistory";
             SqlCommand command = new SqlCommand(commandText, conForLc);
             SqlDataReader reader1 = command.ExecuteReader();
             while (reader1.Read())
             {
-                System.Console.WriteLine($"Login:{reader1.GetValue(1)}\nCredit ID:{reader1.GetValue(1)}\nPurpose:{reader1.GetValue(2)}\nCredit amoung:{reader1.GetValue(3)}\nTerm:{reader1.GetValue(4)}\nDelay:{reader1.GetValue(5)}\nDate of opening:{reader1.GetValue(6)}\nDate of closing:{reader1.GetValue(7)}\nCredit rest:{reader1.GetValue(8)}\nStatus:{reader1.GetValue(9)}");
+                System.Console.WriteLine($"Login:{reader1.GetValue(0)}\nCredit ID:{reader1.GetValue(1)}\nPurpose:{reader1.GetValue(2)}\nCredit amoung:{reader1.GetValue(3)}\nTerm:{reader1.GetValue(4)}\nDelay:{reader1.GetValue(5)}\nDate of opening:{reader1.GetValue(6)}\nDate of closing:{reader1.GetValue(7)}\nCredit rest:{reader1.GetValue(8)}\nStatus:{reader1.GetValue(9)}");
             }
             reader1.Close();
         }

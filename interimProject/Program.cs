@@ -84,15 +84,10 @@ namespace interimProject
                         customer.ClientInsert();
                         goto MenuForClient;
                     }
-                    else
-                    {
-                        Console.Clear();
-                        goto firstMenu;
-                    }
+                Console.Clear();
+                goto firstMenu;
 
             }
-
-
         MenuForClient:
             System.Console.WriteLine("Here is your personal account!");
             System.Console.WriteLine("Push *1* --> to apply for a loan\nPush *2*--> info about you\nPush *3* --> to contact admin");
@@ -136,6 +131,8 @@ namespace interimProject
                             goto internalMenu;                        
                     }
                     break;
+                case 3:
+                break;
 
             }
 
