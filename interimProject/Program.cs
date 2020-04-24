@@ -107,7 +107,7 @@ namespace interimProject
                     break;
                 case 2:
                     internalMenu:
-                    System.Console.Write("Push *1* --> view personal details\nPush *2* --> view application history\nPush *3* -->view repayment schedule\nPush *3* -->credit history\n Push *4*--> to exit\nYour choise: ");
+                    System.Console.Write("Push *1* --> view personal details\nPush *2* --> view application history\nPush *3* -->credit history\n Push *4*--> to exit\nYour choise: ");
                     int choise = int.Parse(Console.ReadLine());
                     switch (choise)
                     {
@@ -119,7 +119,18 @@ namespace interimProject
                             Console.ReadKey();
                             goto internalMenu;
                         case 2:
-                        break;
+                            Console.Clear();
+                            System.Console.WriteLine("****Your applications*****");
+                            register.SelectionByLoginFromApp(login);
+                            Console.ReadKey();
+                            goto internalMenu;
+                        case 3:
+                            Console.Clear();
+                            System.Console.WriteLine("****Your credits*****");
+                            
+                            Console.ReadKey();
+                            goto internalMenu;
+                        
                     }
                     break;
 

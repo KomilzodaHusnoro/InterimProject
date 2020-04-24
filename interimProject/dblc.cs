@@ -23,7 +23,7 @@ namespace interimProject
                 System.Console.WriteLine("Ooops, troubles with connection!!!");
             }
         }
-        
+
         // public void Select()
         // {
         //     string commandText = "Select * from Register";
@@ -72,21 +72,17 @@ namespace interimProject
             }
             readerForChecking.Close();
         }
-    }
-    class AplicationHistory
-    {
-        const string conS = @"Data Source= localhost; Initial Catalog = LoanCalculator; user id= sa; password=Root123.";
-        SqlConnection conForLc = new SqlConnection(conS);
-        public void AddAplication(int purpose, int creditAmoung, int salary, int term)
+        public void SelectionByLoginFromApp(string login)
         {
-            string insertingSqlCommand = string.Format($"insert into Aplication ([Purpose],[Salary], [term], [creditAmoung]) values ({purpose}, {salary}, {term}, {creditAmoung})");
+            string SelectionByIdCommand = string.Format($"select * from Application where login = '{login}'");
+            SqlCommand command = new SqlCommand(SelectionByIdCommand, conForLc);
+            SqlDataReader reader = command.ExecuteReader();
 
-            SqlCommand command = new SqlCommand(insertingSqlCommand, conForLc);
-            var result = command.ExecuteNonQuery();
-            if (result > 0)
+            while (reader.Read())
             {
-                System.Console.WriteLine("successfully registered!");
+                System.Console.WriteLine($"Purpose:{reader.GetValue(1)}\nMounth salary at that time:{reader.GetValue(2)}\nTerm:{reader.GetValue(3)}\nCredit Amoung:{reader.GetValue(5)}\nResolution:{reader.GetValue(6)}");
             }
+            reader.Close();
         }
     }
 }
