@@ -6,7 +6,7 @@ namespace interimProject
 {
     class Application
     {
-        string login { get; set; }
+        string password { get; set; }
         int Purpose { get; set; }
         int Salary { get; set; }
         int term { get; set; }
@@ -16,8 +16,8 @@ namespace interimProject
         public bool Calculator(string login)
         {
             int points2 = 0;
-            this.login = login;
-            string commandText = $"Select * from Register where login = '{login}'";
+            this.password = password;
+            string commandText = $"Select * from Register where SystemPassword = '{password}'";
             if (ConnectionState.Closed == conForLc.State) { conForLc.Open(); }
             SqlCommand add = new SqlCommand(commandText, conForLc);
             SqlDataReader read = add.ExecuteReader();
@@ -78,7 +78,7 @@ namespace interimProject
         }
         public void Insert()
         {
-            string insertingSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term]) values ('{login}', {Purpose} ,{Salary}, {creditAmoung}, {term})");
+            string insertingSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term]) values ('{password}', {Purpose} ,{Salary}, {creditAmoung}, {term})");
             if (ConnectionState.Closed == conForLc.State)
             { conForLc.Open(); }
             SqlCommand command = new SqlCommand(insertingSqlCommand, conForLc);

@@ -94,10 +94,10 @@ namespace interimProject
             switch (cchoise)
             {
                 case 1:
-                    System.Console.Write("Verify your identity! Enter login: ");
-                    string login = Console.ReadLine();
+                    System.Console.Write("Verify your identity! Enter your system-password: ");
+                    string password = Console.ReadLine();
                     Application application = new Application();
-                    application.Calculator(login);
+                    application.Calculator(password);
                     application.Insert();
                     break;
             }
