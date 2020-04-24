@@ -24,7 +24,7 @@ namespace interimProject
         SqlConnection conForLc = new SqlConnection(conS);
         public void massageInsert ()
         {
-            string insertingSqlCommand = string.Format($"insert into ConnectingAdmin ([login],[Company],[massage]) values ('{login}','{company}','{massage}'");
+            string insertingSqlCommand = string.Format($"insert into ConnectingAdmin ([login],[Company],[massage]) values ('{login}','{company}','{massage}')");
             if (ConnectionState.Closed == conForLc.State )
                 {conForLc.Open();}
             SqlCommand command = new SqlCommand(insertingSqlCommand,conForLc);
@@ -32,7 +32,7 @@ namespace interimProject
             Console.Clear();
             if (result > 0)
             {
-                System.Console.WriteLine($"Your massage was successfully registered!\n Wellcome!");
+                System.Console.WriteLine($"Your massage was successfully registered!");
             }
         }
 

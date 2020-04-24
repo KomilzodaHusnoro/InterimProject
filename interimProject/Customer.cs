@@ -29,15 +29,15 @@ namespace interimProject
             cLogin = Console.ReadLine();
             System.Console.Write("Enter your PassportID: ");
             cPassportID = Console.ReadLine();
-            System.Console.WriteLine("Enter your gender:\n-->man\n-->woman\n-->did not decide");
+            System.Console.Write("*1*-->man\n*2*-->woman\n*3*-->did not decide\nEnter your gender: ");
             cGender = Console.ReadLine().ToLower();
-            if (cGender == "man") { points += 1; } else if (cGender == "woman") { points += 2; }
-            System.Console.WriteLine("Your Merital Status:\n-->single\n-->married\n-->divorced\n-->widower");
-            cMaritalStatus = Console.ReadLine().ToLower();
-            if (cMaritalStatus == "single") { points += 1;}
-            else if (cMaritalStatus == "married") { points += 1; }
-            else if (cMaritalStatus == "divorced") { points += 1; }
-            else if (cMaritalStatus == "widover") { points += 2; } 
+            if (cGender == "1") {cGender="man"; points ++; } else if (cGender == "2") {cGender="woman"; points += 2; }
+            System.Console.Write("*1*-->single\n*2*-->married\n*3*-->divorced\n*4*-->widower/widow\nYour Merital Status: ");
+            cMaritalStatus = Console.ReadLine();
+            if (cMaritalStatus =="1") {cMaritalStatus="single"; points ++;}
+            else if (cMaritalStatus == "2") {cMaritalStatus="married"; points += 1; }
+            else if (cMaritalStatus == "3" ) {cMaritalStatus="divorced"; points += 1; }
+            else if (cMaritalStatus == "4" ) {cMaritalStatus="widover"; points += 2; } 
             System.Console.WriteLine("what is your citizenship?");
             cCitizenship = Console.ReadLine().ToUpper();
             if (cCitizenship == "TAJIKISTAN") { points += 1; };

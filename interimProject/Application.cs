@@ -29,17 +29,17 @@ namespace interimProject
             }
             read.Close();
             System.Console.WriteLine("To apply for a loan, you must fill out the fields!");
-            System.Console.Write("Choose purpose:\n*1* --> Appliances\n*2*-->HomeFix\n*3*-->Phone\n*4*-->smth else\nYour choise:");
-            string purpose = Console.ReadLine().ToLower();
+            System.Console.Write("Choose purpose:\n*1* --> Appliances\n*2*-->HomeFix\n*3*-->Phone\n-->smth else\nYour choise:");
+            string purpose = Console.ReadLine();
             this.Purpose = purpose;
-            if (purpose == "appliances") { points2 += 2; }
-            else if (purpose == "homeFix") { points2++;; }
-            else if (purpose == "phone") { points2--;; }
+            if (purpose == "1") { purpose="Appliances"; points2 += 2; }
+            else if (purpose == "2") {purpose = "Phone"; points2++;}
+            else if (purpose == "3") {purpose= "Phone"; points2--;; }
             System.Console.Write("Enter Credit amoung: ");
             int creditAmoung = int.Parse(Console.ReadLine());
             this.creditAmoung = creditAmoung;
             money:
-            System.Console.Write("Enter your mounth salary: ");
+            System.Console.Write("Enter your month salary: ");
             int salary = int.Parse(Console.ReadLine());
             if (salary == 0) { System.Console.WriteLine("You should earn money to pay a credit fee!"); goto money; }
             this.Salary = salary;

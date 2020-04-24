@@ -9,12 +9,7 @@ namespace interimProject
         public string aLastName {get; set;}
         public string aFirstName {get; set;}
         public string aLogin {get; set;}
-
         public string aPassportID {get; set;}
-        public string aGender {get; set;}
-        public string aMaritalStatus {get; set;}
-        public int aBirthDate {get; set;}
-        public string aCitizenship {get; set;}
         public string aSystemPassword {get; set;}
         public Admin()
         {
@@ -26,12 +21,6 @@ namespace interimProject
             string aLogin = Console.ReadLine();
             System.Console.Write("Enter your PassportID: ");
             string aPassportID = Console.ReadLine();
-            System.Console.WriteLine("Enter your gender:\n-->man\n-->woman\n-->did not decide");
-            string aGender = Console.ReadLine().ToLower();
-            System.Console.WriteLine("what is your citizenship?");
-            string aCitizenship = Console.ReadLine().ToUpper();
-            System.Console.Write("Enter your Birth Date (YYYY): ");
-            int aBirthDate = int.Parse(Console.ReadLine());
             System.Console.Write("Create system-password:");
             string aSystemPassword = Console.ReadLine();
         }
@@ -39,7 +28,7 @@ namespace interimProject
         SqlConnection conForLc = new SqlConnection(conS);
         public void AdminInsert ()
         {
-            string insertingSqlCommand = string.Format($"insert into Register([Lastname],[FirstName], [login], [role], [PassportID],[Gender], [BirthDate], [Citizenship], [SystemPassword]) values ('{aLastName}','{aFirstName}', '{aLogin}','Admin','{aPassportID}', '{aGender}', {aBirthDate}, '{aCitizenship}','{aSystemPassword}')");
+            string insertingSqlCommand = string.Format($"insert into Register([Lastname],[FirstName], [login], [role], [PassportID], [SystemPassword]) values ('{aLastName}','{aFirstName}', '{aLogin}','Admin','{aPassportID}','{aSystemPassword}')");
             
             SqlCommand command = new SqlCommand(insertingSqlCommand,conForLc);
             var result = command.ExecuteNonQuery();

@@ -32,6 +32,7 @@ namespace interimProject
                             string inputLogin = Console.ReadLine();
                             System.Console.Write("Enter system-password: ");
                             string inputSystemPassword = Console.ReadLine();
+                            Console.Clear();
                             register.Checkingidentity(inputLogin, inputSystemPassword);
                             goto MenuForAdmins;
                         }
@@ -49,6 +50,7 @@ namespace interimProject
                         string inputLogin = Console.ReadLine();
                         System.Console.Write("Enter system-password: ");
                         string inputSystemPassword = Console.ReadLine();
+                        Console.Clear();
                         register.Checkingidentity(inputLogin, inputSystemPassword);
                         goto MenuForClient;
                     }
@@ -89,11 +91,12 @@ namespace interimProject
 
             }
         MenuForClient:
-            System.Console.WriteLine("Here is your personal account!");
-            System.Console.WriteLine("Push *1* --> to apply for a loan\nPush *2*--> info about you\nPush *3* --> to contact admin");
-            int cchoise = int.Parse(Console.ReadLine());
             System.Console.Write("Verify your identity! Enter your system login: +");
             string login = Console.ReadLine();
+        MenuForClient2:
+            System.Console.WriteLine("Here is your personal account!");
+            System.Console.WriteLine("Push *1* --> to apply for a loan\nPush *2*--> info about you\nPush *3* --> to contact admin\nPush *4*--> to exit");
+            int cchoise = int.Parse(Console.ReadLine());
             switch (cchoise)
             {
                 case 1:
@@ -104,7 +107,7 @@ namespace interimProject
                     //     Graphic graphic = new Graphic();
                     //     graphic.BuildGraphic(application.creditAmoung,application.term,login);
                     // }
-                    goto MenuForClient;
+                    goto MenuForClient2;
                 case 2:
                     internalMenu:
                     System.Console.Write("Push *1* --> view personal details\nPush *2* --> view an application history\nPush *3* -->view a credit history\nPush *4*--> to exit\nYour choise: ");
@@ -131,12 +134,14 @@ namespace interimProject
                             Console.ReadKey();
                             goto internalMenu;
                         default:
-                            goto MenuForClient;                      
+                            goto MenuForClient2;                      
                     }
                 case 3:
                     SendMassage newMassage = new SendMassage(login);
                     newMassage.massageInsert();
-                break;
+                goto MenuForClient2;
+                case 4:
+                goto firstMenu;
 
             }
         MenuForAdmins:
