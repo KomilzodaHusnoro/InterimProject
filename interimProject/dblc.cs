@@ -15,15 +15,10 @@ namespace interimProject
         public void CheckingConnection()
         {
             if (conForLc.State == ConnectionState.Open)
-            {
-                System.Console.WriteLine("Connected successfully!!!");
-            }
-            else
-            {
-                System.Console.WriteLine("Ooops, troubles with connection!!!");
-            }
+            {System.Console.WriteLine("Connected successfully!!!");}
+            else{System.Console.WriteLine("Ooops, troubles with connection!!!");}
         }
-        public void Select()
+        public void SelectFromRegister()
         {
             string commandText = "Select * from Register";
             SqlCommand command = new SqlCommand(commandText, conForLc);
@@ -32,6 +27,29 @@ namespace interimProject
             {
                 System.Console.WriteLine($"ID:{reader.GetValue(0)}\nLast Name:{reader.GetValue(1)}\nFirst Name:{reader.GetValue(2)}\nLogin:{reader.GetValue(3)}\nRole:{reader.GetValue(4)}PassportID:{reader.GetValue(5)}\nGender:{reader.GetValue(6)}\nMarital status:{reader.GetValue(7)}\nBirth Date:{reader.GetValue(8)}\nCitizenship:{reader.GetValue(9)}\nSystemPassword:{reader.GetValue(10)}\ndefaultPoint:{reader.GetValue(11)}");
             }
+            reader.Close();
+        }
+        public void SelectFromApplication()
+        {
+            string commandText = "Select * from Application";
+            SqlCommand command = new SqlCommand(commandText, conForLc);
+            SqlDataReader reader1 = command.ExecuteReader();
+            while (reader1.Read())
+            {
+                System.Console.WriteLine($"Login:{reader1.GetValue(0)}\nPurpose:{reader1.GetValue(1)}\nMounth salary at that time:{reader1.GetValue(2)}\nTerm:{reader1.GetValue(3)}\nCredit Amoung:{reader1.GetValue(4)}\nResolution:{reader1.GetValue(5)}");
+            }
+            reader1.Close();
+        }
+        public void SelectFromCreditHistory()
+        {
+            string commandText = "Select * from Application";
+            SqlCommand command = new SqlCommand(commandText, conForLc);
+            SqlDataReader reader1 = command.ExecuteReader();
+            while (reader1.Read())
+            {
+                System.Console.WriteLine($"Login:{reader1.GetValue(1)}\nCredit ID:{reader1.GetValue(1)}\nPurpose:{reader1.GetValue(2)}\nCredit amoung:{reader1.GetValue(3)}\nTerm:{reader1.GetValue(4)}\nDelay:{reader1.GetValue(5)}\nDate of opening:{reader1.GetValue(6)}\nDate of closing:{reader1.GetValue(7)}\nCredit rest:{reader1.GetValue(8)}\nStatus:{reader1.GetValue(9)}");
+            }
+            reader1.Close();
         }
         // public void clientInsert (string lastName, string firstName, string middleName)
         // {

@@ -20,7 +20,7 @@ namespace interimProject
         public Customer ()
         {
             points = 0;
-            System.Console.WriteLine("You will be registered as a regular user!");
+            System.Console.WriteLine("*Registing a regular user*");
             System.Console.Write("Enter your Last Name: ");
             cLastName = Console.ReadLine();
             System.Console.Write("Enter your First Name: ");

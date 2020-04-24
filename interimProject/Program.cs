@@ -145,8 +145,28 @@ namespace interimProject
             switch (adminChoise)
             {
                 case 1:
-                    register.Select();
+                    Console.Clear();
+                    register.SelectFromRegister();
                 goto MenuForAdmins;
+                case 2:
+                    Console.Clear();
+                    register.SelectFromApplication();
+                goto MenuForAdmins;
+                case 3:
+                    Console.Clear();
+                    register.SelectFromCreditHistory();
+                goto MenuForAdmins;
+                case 4:
+                    Console.Clear();
+                    Customer adminAddingClient = new Customer();
+                    adminAddingClient.ClientInsert();
+                    System.Console.Write("Would you like to go to regular customer Menu?\n*1*-->Yes\n*2*-->No\nYour choise: ");
+                    int choiseAdmin = int.Parse(Console.ReadLine());
+                    if (choiseAdmin == 1){goto MenuForClient;}
+                    else if (choiseAdmin == 2) {goto MenuForAdmins;}
+                break;
+                case 5:
+                break;
             }
         }
     }
