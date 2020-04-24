@@ -58,7 +58,7 @@ namespace interimProject
                     }
                 case 2:  // register case
                 lie:
-                    System.Console.WriteLine("Are you a part of Alif-Family?\nPush *1*--> if you are an Alif-bank employee\nPush *2*--> if you are not an Alif-bank employee");
+                    System.Console.WriteLine("Are you a part of Alif-Family?\nPush *1*--> if you are an Alif-bank employee\nPush *2*--> if you are not an Alif-bank employee\nPush *3* --> to exit");
                     int choise3 = int.Parse(Console.ReadLine());
                     if (choise3 == 1)
                     {
@@ -84,7 +84,12 @@ namespace interimProject
                         customer.ClientInsert();
                         goto MenuForClient;
                     }
-                    break;
+                    else
+                    {
+                        Console.Clear();
+                        goto firstMenu;
+                    }
+
             }
 
 
@@ -92,21 +97,26 @@ namespace interimProject
             System.Console.WriteLine("Here is your personal account!");
             System.Console.WriteLine("Push *1* --> to apply for a loan\nPush *2*--> to view your personal details\nPush *3* --> to contact admin");
             int cchoise = int.Parse(Console.ReadLine());
+            System.Console.Write("Verify your identity! Enter your system login: ");
+            string login = Console.ReadLine();
             switch (cchoise)
             {
                 case 1:
-                    System.Console.Write("Verify your identity! Enter your system login: ");
-                    string password = Console.ReadLine();
                     Application application = new Application();
-                    application.Calculator(password);
-                    application.Insert();
+                    application.Calculator(login);
                     break;
+                case 2:
+                    System.Console.Write("Push *1* --> view personal details\nPush *2* --> view application history\nPush *3* -->view repayment schedule\nPush *3* -->credit history\nYour choise: ");
+                    int choise = int.Parse(Console.ReadLine());
+                    switch (choise)
+                    {
+                        case 1:
+                        register.SelectionByLogin(login);
+                        break;
+                    }
+                    break;
+
             }
-
-
-
-
-
 
         MenuForAdmins:
             System.Console.WriteLine("");

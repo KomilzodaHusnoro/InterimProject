@@ -59,9 +59,10 @@ namespace interimProject
                 {conForLc.Open();}
             SqlCommand command = new SqlCommand(insertingSqlCommand,conForLc);
             var result = command.ExecuteNonQuery();
+            Console.Clear();
             if (result > 0)
             {
-                System.Console.WriteLine($"successfully registered!\n Wellcome!");
+                System.Console.WriteLine($"Successfully registered!\n Wellcome!");
             }
         }
         

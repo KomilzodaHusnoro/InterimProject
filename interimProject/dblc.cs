@@ -21,16 +21,17 @@ namespace interimProject
                 System.Console.WriteLine("Ooops, troubles with connection!!!");
             } 
         }
-        // public void SelectionById(int idselect)
-        // {
-        //     string SelectionByIdCommand = string.Format($"select * from Register where Id = {idselect}");
-        //     SqlCommand command = new SqlCommand(SelectionByIdCommand, conForLc);
-        //     SqlDataReader reader = command.ExecuteReader();
-        //     while (reader.Read())
-        //     {
-        //         System.Console.WriteLine($"ID:{reader.GetValue(0)}\nLast Name:{reader.GetValue(1)}\nFirst Name:{reader.GetValue(2)}\nMiddle Name:{reader.GetValue(3)}");
-        //     }
-        // }
+        public void SelectionByLogin(string login)
+        {
+            string SelectionByIdCommand = string.Format($"select * from Register where login = {login}");
+            SqlCommand command = new SqlCommand(SelectionByIdCommand, conForLc);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                System.Console.WriteLine($"Last Name:{reader.GetValue(1)}\nFirst Name:{reader.GetValue(2)}\nLogin:{reader.GetValue(3)}\nPassport ID:{reader.GetValue(5)}\nGender:{reader.GetValue(6)}\nMarital Status:{reader.GetValue(7)}\nBirth Date:{reader.GetValue(8)}\nCitizenship:{reader.GetValue(9)}\nSystem Password:{reader.GetValue(10)}");
+            }
+            reader.Close();
+        }
         // public void Select()
         // {
         //     string commandText = "Select * from Register";

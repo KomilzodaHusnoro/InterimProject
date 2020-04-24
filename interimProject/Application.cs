@@ -16,6 +16,8 @@ namespace interimProject
         public bool Calculator(string login)
         {
             int points2 = 0;
+            int delay = 0;
+            int countcloseCredit = 0;
             this.login = login;
             string commandText = $"Select * from Register where login = '{login}'";
             if (ConnectionState.Closed == conForLc.State) { conForLc.Open(); }
@@ -31,15 +33,15 @@ namespace interimProject
             int purpose = int.Parse(Console.ReadLine());
             this.Purpose = purpose;
             if (purpose == 1) { points2 += 2; }
-            else if (purpose == 2) { points2 += 1; }
-            else if (purpose == 4) { points2 -= 1; }
+            else if (purpose == 2) { points2++;; }
+            else if (purpose == 4) { points2--;; }
             System.Console.Write("Enter Credit amoung: ");
             int creditAmoung = int.Parse(Console.ReadLine());
             this.creditAmoung = creditAmoung;
             money:
             System.Console.Write("Enter your mounth salary: ");
             int salary = int.Parse(Console.ReadLine());
-            if (salary == 0){System.Console.WriteLine("You should earn money to pay a credit fee!");goto money;}
+            if (salary == 0) { System.Console.WriteLine("You should earn money to pay a credit fee!"); goto money; }
             this.Salary = salary;
             System.Console.Write("Enter term (MM): ");
             points2++;
@@ -48,9 +50,7 @@ namespace interimProject
             if ((creditAmoung * 100) / salary < 80) { points2 += 4; }
             else if ((creditAmoung * 100) / salary >= 80 & (creditAmoung * 100) / salary < 150) { points2 += 3; }
             else if ((creditAmoung * 100) / salary >= 150 & (creditAmoung * 100) / salary < 250) { points2 += 2; }
-            else if ((creditAmoung * 100) / salary > 250) { points2 += 1; }
-            int delay = 0;
-            int countcloseCredit = 0;
+            else if ((creditAmoung * 100) / salary > 250) { points2++; }
             commandText = $"Select * from CreditHistory where login = '{login}'";
             SqlCommand find = new SqlCommand(commandText, conForLc);
             SqlDataReader findreader = find.ExecuteReader();
@@ -62,33 +62,42 @@ namespace interimProject
                     System.Console.WriteLine("You have an open credit!\nApplication rejected!!!");
                     return false;
                 }
-                else { countcloseCredit += 1; }
+                else { countcloseCredit++; }
+            
             }
+            if (countcloseCredit>=3){points2+=2;}
+            else if (countcloseCredit>0){points2++;}
+            else {points2--;}
+            if(delay>6){points2-=3;}
+            else if(delay>4){points2-=2;}
+            else if(delay==4){points2--;}
             findreader.Close();
             if (points2 < 12)
             {
-                System.Console.WriteLine("Application rejected!!!");
+                string insertingSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term], [resolution]) values ('{login}', {Purpose} ,{Salary}, {creditAmoung}, {term}, 'rejected')");
+                if (ConnectionState.Closed == conForLc.State)
+                { conForLc.Open(); }
+                SqlCommand command = new SqlCommand(insertingSqlCommand, conForLc);
+                var result = command.ExecuteNonQuery();
+                Console.WriteLine("Application rejected!!!");
+                Console.ReadKey();
                 return false;
             }
             else
             {
+                string insertingSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term], [resolution]) values ('{login}', {Purpose} ,{Salary}, {creditAmoung}, {term}, 'approved')");
+                if (ConnectionState.Closed == conForLc.State)
+                { conForLc.Open(); }
+                SqlCommand command = new SqlCommand(insertingSqlCommand, conForLc);
+                var result = command.ExecuteNonQuery();
                 System.Console.WriteLine("Credit approved for you!");
+                Console.ReadKey();
                 return true;
             }
 
 
+
         }
-        public void Insert()
-        {
-            string insertingSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term]) values ('{login}', {Purpose} ,{Salary}, {creditAmoung}, {term})");
-            if (ConnectionState.Closed == conForLc.State)
-            { conForLc.Open(); }
-            SqlCommand command = new SqlCommand(insertingSqlCommand, conForLc);
-            var result = command.ExecuteNonQuery();
-            if (result > 0)
-            {
-                System.Console.WriteLine($"Your application was saved!");
-            }
-        }
+
     }
 }
