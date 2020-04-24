@@ -6,7 +6,7 @@ namespace interimProject
 {
     class Application
     {
-        string password { get; set; }
+        string login { get; set; }
         int Purpose { get; set; }
         int Salary { get; set; }
         int term { get; set; }
@@ -16,8 +16,8 @@ namespace interimProject
         public bool Calculator(string login)
         {
             int points2 = 0;
-            this.password = password;
-            string commandText = $"Select * from Register where SystemPassword = '{password}'";
+            this.login = login;
+            string commandText = $"Select * from Register where login = '{login}'";
             if (ConnectionState.Closed == conForLc.State) { conForLc.Open(); }
             SqlCommand add = new SqlCommand(commandText, conForLc);
             SqlDataReader read = add.ExecuteReader();
@@ -36,8 +36,10 @@ namespace interimProject
             System.Console.Write("Enter Credit amoung: ");
             int creditAmoung = int.Parse(Console.ReadLine());
             this.creditAmoung = creditAmoung;
+            money:
             System.Console.Write("Enter your mounth salary: ");
             int salary = int.Parse(Console.ReadLine());
+            if (salary == 0){System.Console.WriteLine("You should earn money to pay a credit fee!");goto money;}
             this.Salary = salary;
             System.Console.Write("Enter term (MM): ");
             points2++;
@@ -78,14 +80,14 @@ namespace interimProject
         }
         public void Insert()
         {
-            string insertingSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term]) values ('{password}', {Purpose} ,{Salary}, {creditAmoung}, {term})");
+            string insertingSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term]) values ('{login}', {Purpose} ,{Salary}, {creditAmoung}, {term})");
             if (ConnectionState.Closed == conForLc.State)
             { conForLc.Open(); }
             SqlCommand command = new SqlCommand(insertingSqlCommand, conForLc);
             var result = command.ExecuteNonQuery();
             if (result > 0)
             {
-                System.Console.WriteLine($"successfully registered!\n Wellcome!");
+                System.Console.WriteLine($"Your application was saved!");
             }
         }
     }

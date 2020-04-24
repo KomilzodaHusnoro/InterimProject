@@ -13,6 +13,7 @@ namespace interimProject
             register.OpenConnection();
         //register.CheckingConnection();
         firstMenu:
+            Console.Clear();
             Console.WriteLine("Push *1* --> to Log In\nPush *2* --> to Sign Up");
             int directory = int.Parse(Console.ReadLine());
             switch (directory)
@@ -94,7 +95,7 @@ namespace interimProject
             switch (cchoise)
             {
                 case 1:
-                    System.Console.Write("Verify your identity! Enter your system-password: ");
+                    System.Console.Write("Verify your identity! Enter your system login: ");
                     string password = Console.ReadLine();
                     Application application = new Application();
                     application.Calculator(password);
