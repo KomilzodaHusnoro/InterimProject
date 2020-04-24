@@ -76,13 +76,13 @@ namespace interimProject
         {
             string SelectionByIdCommand = string.Format($"select * from Application where login = '{login}'");
             SqlCommand command = new SqlCommand(SelectionByIdCommand, conForLc);
-            SqlDataReader reader = command.ExecuteReader();
+            SqlDataReader reader1 = command.ExecuteReader();
 
-            while (reader.Read())
+            while (reader1.Read())
             {
-                System.Console.WriteLine($"Purpose:{reader.GetValue(1)}\nMounth salary at that time:{reader.GetValue(2)}\nTerm:{reader.GetValue(3)}\nCredit Amoung:{reader.GetValue(5)}\nResolution:{reader.GetValue(6)}");
+                System.Console.WriteLine($"Purpose:{reader1.GetValue(1)}\nMounth salary at that time:{reader1.GetValue(2)}\nTerm:{reader1.GetValue(3)}\nCredit Amoung:{reader1.GetValue(4)}\nResolution:{reader1.GetValue(5)}");
             }
-            reader.Close();
+            reader1.Close();
         }
     }
 }

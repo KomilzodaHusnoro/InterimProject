@@ -7,7 +7,7 @@ namespace interimProject
     class Application
     {
         string login { get; set; }
-        int Purpose { get; set; }
+        string Purpose { get; set; }
         int Salary { get; set; }
         int term { get; set; }
         int creditAmoung { get; set; }
@@ -29,12 +29,12 @@ namespace interimProject
             }
             read.Close();
             System.Console.WriteLine("To apply for a loan, you must fill out the fields!");
-            System.Console.Write("Choose purpose:\n*1* --> Appliances\n*2*-->HomeFix\n*3*-->to buy phone\n*4*-->smth else\nYour choise:");
-            int purpose = int.Parse(Console.ReadLine());
+            System.Console.Write("Choose purpose:\n*1* --> Appliances\n*2*-->HomeFix\n*3*-->Phone\n*4*-->smth else\nYour choise:");
+            string purpose = Console.ReadLine().ToLower();
             this.Purpose = purpose;
-            if (purpose == 1) { points2 += 2; }
-            else if (purpose == 2) { points2++;; }
-            else if (purpose == 4) { points2--;; }
+            if (purpose == "appliances") { points2 += 2; }
+            else if (purpose == "homeFix") { points2++;; }
+            else if (purpose == "phone") { points2--;; }
             System.Console.Write("Enter Credit amoung: ");
             int creditAmoung = int.Parse(Console.ReadLine());
             this.creditAmoung = creditAmoung;
@@ -74,7 +74,7 @@ namespace interimProject
             findreader.Close();
             if (points2 < 12)
             {
-                string insertingSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term], [resolution]) values ('{login}', {Purpose} ,{Salary}, {creditAmoung}, {term}, 'rejected')");
+                string insertingSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term], [resolution]) values ('{login}', '{Purpose}' ,{Salary}, {creditAmoung}, {term}, 'rejected')");
                 if (ConnectionState.Closed == conForLc.State)
                 { conForLc.Open(); }
                 SqlCommand command = new SqlCommand(insertingSqlCommand, conForLc);
@@ -85,7 +85,7 @@ namespace interimProject
             }
             else
             {
-                string insertingSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term], [resolution]) values ('{login}', {Purpose} ,{Salary}, {creditAmoung}, {term}, 'approved')");
+                string insertingSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term], [resolution]) values ('{login}', '{Purpose}' ,{Salary}, {creditAmoung}, {term}, 'approved')");
                 if (ConnectionState.Closed == conForLc.State)
                 { conForLc.Open(); }
                 SqlCommand command = new SqlCommand(insertingSqlCommand, conForLc);

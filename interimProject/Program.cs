@@ -107,7 +107,7 @@ namespace interimProject
                     break;
                 case 2:
                     internalMenu:
-                    System.Console.Write("Push *1* --> view personal details\nPush *2* --> view application history\nPush *3* -->credit history\n Push *4*--> to exit\nYour choise: ");
+                    System.Console.Write("Push *1* --> view personal details\nPush *2* --> view an application history\nPush *3* -->view a credit history\nPush *4*--> to exit\nYour choise: ");
                     int choise = int.Parse(Console.ReadLine());
                     switch (choise)
                     {
