@@ -45,6 +45,21 @@ namespace interimProject
         //         System.Console.WriteLine("Insert command successfull!!!");
         //     }
         // }
+        public void Checkingidentity(string inputLogin, string inputSystemPassword)
+        {
+            string checkingcommand = string.Format($"select * from Register");
+            SqlCommand checking = new SqlCommand(checkingcommand, conForLc);
+            SqlDataReader readerForChecking = checking.ExecuteReader();
+            while (readerForChecking.Read())
+            {
+                if (inputLogin == readerForChecking.GetValue(3).ToString() && inputSystemPassword == readerForChecking.GetValue(10).ToString())
+                {
+                    System.Console.WriteLine($"wellcome, {readerForChecking.GetValue(2).ToString()}");
+                }
+                else { System.Console.WriteLine("Incorrect Login or systempassword!!!"); }
+            }
+            readerForChecking.Close();
+        }
         public void SelectionByLogin(string login)
         {
             string SelectionByIdCommand = string.Format($"select * from Register where login = '{login}'");
@@ -57,21 +72,6 @@ namespace interimProject
             }
             reader.Close();
         }
-
-        public void Checkingidentity(string inputLogin, string inputSystemPassword)
-        {
-            string checkingcommand = string.Format($"select * from Register");
-            SqlCommand checking = new SqlCommand(checkingcommand, conForLc);
-            SqlDataReader readerForChecking = checking.ExecuteReader();
-            while (readerForChecking.Read())
-            {
-                if (inputLogin == readerForChecking.GetValue(3).ToString() && inputSystemPassword == readerForChecking.GetValue(10).ToString())
-                {
-                    System.Console.WriteLine($"wellcome, {readerForChecking.GetValue(2).ToString()}");
-                }
-            }
-            readerForChecking.Close();
-        }
         public void SelectionByLoginFromApp(string login)
         {
             string SelectionByIdCommand = string.Format($"select * from Application where login = '{login}'");
@@ -81,6 +81,18 @@ namespace interimProject
             while (reader1.Read())
             {
                 System.Console.WriteLine($"Purpose:{reader1.GetValue(1)}\nMounth salary at that time:{reader1.GetValue(2)}\nTerm:{reader1.GetValue(3)}\nCredit Amoung:{reader1.GetValue(4)}\nResolution:{reader1.GetValue(5)}");
+            }
+            reader1.Close();
+        }
+        public void SelectionByLoginFromCreditHistory(string login)
+        {
+            string SelectionByIdCommand = string.Format($"select * from CreditHistory where login = '{login}'");
+            SqlCommand command = new SqlCommand(SelectionByIdCommand, conForLc);
+            SqlDataReader reader1 = command.ExecuteReader();
+
+            while (reader1.Read())
+            {
+                System.Console.WriteLine($"Credit ID:{reader1.GetValue(1)}\nPurpose:{reader1.GetValue(2)}\nCredit amoung:{reader1.GetValue(3)}\nTerm:{reader1.GetValue(4)}\nDelay:{reader1.GetValue(5)}\nDate of opening:{reader1.GetValue(6)}\nDate of closing:{reader1.GetValue(7)}\nCredit rest:{reader1.GetValue(8)}\nStatus:{reader1.GetValue(9)}");
             }
             reader1.Close();
         }
