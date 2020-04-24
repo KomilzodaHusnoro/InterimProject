@@ -7,31 +7,23 @@ namespace interimProject
     {
         const string conS = @"Data Source= localhost; Initial Catalog = LoanCalculator; user id= sa; password=Root123.";
         SqlConnection conForLc = new SqlConnection(conS);
-        public void OpenConnection ()
+        public void OpenConnection()
         {
             conForLc.Open();
             System.Console.WriteLine("db is connected!");
         }
         public void CheckingConnection()
         {
-        if (conForLc.State == ConnectionState.Open)
+            if (conForLc.State == ConnectionState.Open)
             {
                 System.Console.WriteLine("Connected successfully!!!");
-            }else{
-                System.Console.WriteLine("Ooops, troubles with connection!!!");
-            } 
-        }
-        public void SelectionByLogin(string login)
-        {
-            string SelectionByIdCommand = string.Format($"select * from Register where login = {login}");
-            SqlCommand command = new SqlCommand(SelectionByIdCommand, conForLc);
-            SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                System.Console.WriteLine($"Last Name:{reader.GetValue(1)}\nFirst Name:{reader.GetValue(2)}\nLogin:{reader.GetValue(3)}\nPassport ID:{reader.GetValue(5)}\nGender:{reader.GetValue(6)}\nMarital Status:{reader.GetValue(7)}\nBirth Date:{reader.GetValue(8)}\nCitizenship:{reader.GetValue(9)}\nSystem Password:{reader.GetValue(10)}");
             }
-            reader.Close();
+            else
+            {
+                System.Console.WriteLine("Ooops, troubles with connection!!!");
+            }
         }
+        
         // public void Select()
         // {
         //     string commandText = "Select * from Register";
@@ -45,7 +37,7 @@ namespace interimProject
         // public void clientInsert (string lastName, string firstName, string middleName)
         // {
         //     string insertingSqlCommand = string.Format($"insert into Person([Last_Name],[First_Name],[Middle_Name]) values ('{lastName}','{firstName}','{middleName}')");
-            
+
         //     SqlCommand command = new SqlCommand(insertingSqlCommand,conForLc);
         //     var result = command.ExecuteNonQuery();
         //     if (result > 0)
@@ -53,8 +45,19 @@ namespace interimProject
         //         System.Console.WriteLine("Insert command successfull!!!");
         //     }
         // }
-        
-        
+        public void SelectionByLogin(string login)
+        {
+            string SelectionByIdCommand = string.Format($"select * from Register where login = '{login}'");
+            SqlCommand command = new SqlCommand(SelectionByIdCommand, conForLc);
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                System.Console.WriteLine($"Last Name:{reader.GetValue(1)}\nFirst Name:{reader.GetValue(2)}\nLogin:{reader.GetValue(3)}\nPassport ID:{reader.GetValue(5)}\nGender:{reader.GetValue(6)}\nMarital Status:{reader.GetValue(7)}\nBirth Date:{reader.GetValue(8)}\nCitizenship:{reader.GetValue(9)}\nSystem Password:{reader.GetValue(10)}");
+            }
+            reader.Close();
+        }
+
         public void Checkingidentity(string inputLogin, string inputSystemPassword)
         {
             string checkingcommand = string.Format($"select * from Register");
@@ -67,26 +70,23 @@ namespace interimProject
                     System.Console.WriteLine($"wellcome, {readerForChecking.GetValue(2).ToString()}");
                 }
             }
+            readerForChecking.Close();
         }
     }
-    class CreditHistory
-    {
-
-    }
-    class AplicationHistory 
+    class AplicationHistory
     {
         const string conS = @"Data Source= localhost; Initial Catalog = LoanCalculator; user id= sa; password=Root123.";
         SqlConnection conForLc = new SqlConnection(conS);
-       public void AddAplication(int purpose, int creditAmoung, int salary, int term) 
-       {
-           string insertingSqlCommand = string.Format($"insert into Aplication ([Purpose],[Salary], [term], [creditAmoung]) values ({purpose}, {salary}, {term}, {creditAmoung})");
-            
-            SqlCommand command = new SqlCommand(insertingSqlCommand,conForLc);
+        public void AddAplication(int purpose, int creditAmoung, int salary, int term)
+        {
+            string insertingSqlCommand = string.Format($"insert into Aplication ([Purpose],[Salary], [term], [creditAmoung]) values ({purpose}, {salary}, {term}, {creditAmoung})");
+
+            SqlCommand command = new SqlCommand(insertingSqlCommand, conForLc);
             var result = command.ExecuteNonQuery();
             if (result > 0)
             {
                 System.Console.WriteLine("successfully registered!");
             }
-       }
+        }
     }
 }

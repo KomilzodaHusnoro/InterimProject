@@ -95,9 +95,9 @@ namespace interimProject
 
         MenuForClient:
             System.Console.WriteLine("Here is your personal account!");
-            System.Console.WriteLine("Push *1* --> to apply for a loan\nPush *2*--> to view your personal details\nPush *3* --> to contact admin");
+            System.Console.WriteLine("Push *1* --> to apply for a loan\nPush *2*--> info about you\nPush *3* --> to contact admin");
             int cchoise = int.Parse(Console.ReadLine());
-            System.Console.Write("Verify your identity! Enter your system login: ");
+            System.Console.Write("Verify your identity! Enter your system login: +");
             string login = Console.ReadLine();
             switch (cchoise)
             {
@@ -106,12 +106,19 @@ namespace interimProject
                     application.Calculator(login);
                     break;
                 case 2:
-                    System.Console.Write("Push *1* --> view personal details\nPush *2* --> view application history\nPush *3* -->view repayment schedule\nPush *3* -->credit history\nYour choise: ");
+                    internalMenu:
+                    System.Console.Write("Push *1* --> view personal details\nPush *2* --> view application history\nPush *3* -->view repayment schedule\nPush *3* -->credit history\n Push *4*--> to exit\nYour choise: ");
                     int choise = int.Parse(Console.ReadLine());
                     switch (choise)
                     {
                         case 1:
-                        register.SelectionByLogin(login);
+
+                            Console.Clear();
+                            System.Console.WriteLine("****Your delails*****");
+                            register.SelectionByLogin(login);
+                            Console.ReadKey();
+                            goto internalMenu;
+                        case 2:
                         break;
                     }
                     break;
