@@ -15,7 +15,9 @@ namespace interimProject
         // {
         //     decimal mounthAmounght =( creditAmoung + creditAmoung * 0.15m)/term;
         //     if(conForLc.State == ConnectionState.Closed)
-        //     conForLc.Open(); 
+        //      {
+        //     conForLc.Open();
+        //      } 
         //     DateTime date = DateTime.Now;
         //     date.AddMonths(1);
         //     decimal ost = creditAmoung;

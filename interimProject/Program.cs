@@ -93,8 +93,8 @@ namespace interimProject
                         customer.ClientInsert();
                         goto MenuForClient;
                     }
-                Console.Clear();
-                goto firstMenu;
+                    Console.Clear();
+                    goto firstMenu;
 
             }
         MenuForClient:
@@ -116,7 +116,7 @@ namespace interimProject
                     // }
                     goto MenuForClient2;
                 case 2:
-                    internalMenu:
+                internalMenu:
                     System.Console.Write("Push *1* --> view personal details\nPush *2* --> view an application history\nPush *3* --> view a credit history\nPush *4*--> view your mails\nPush *5*--> to exit\nYour choise: ");
                     int choise = int.Parse(Console.ReadLine());
                     switch (choise)
@@ -144,16 +144,16 @@ namespace interimProject
                             Console.Clear();
                             System.Console.WriteLine("****Your mails*****");
                             register.selectbyLoginfromConnectingadmin(login);
-                        goto internalMenu;
+                            goto internalMenu;
                         default:
-                            goto MenuForClient2;                      
+                            goto MenuForClient2;
                     }
                 case 3:
                     SendMassage newMassage = new SendMassage(login);
                     newMassage.massageInsert();
-                goto MenuForClient2;
+                    goto MenuForClient2;
                 case 4:
-                goto firstMenu;
+                    goto firstMenu;
 
             }
         MenuForAdmins:
@@ -166,49 +166,121 @@ namespace interimProject
                 case 1:
                     Console.Clear();
                     register.SelectFromRegister(sortCompany);
-                goto MenuForAdmins;
+                    goto MenuForAdmins;
                 case 2:
                     Console.Clear();
                     register.SelectFromApplication(sortCompany);
-                goto MenuForAdmins;
+                    goto MenuForAdmins;
                 case 3:
                     Console.Clear();
                     register.SelectFromCreditHistory(sortCompany);
-                goto MenuForAdmins;
+                    goto MenuForAdmins;
                 case 4:
                     Console.Clear();
                     register.SelectFromConnectingadmin(sortCompany);
-                goto MenuForAdmins;
+                    goto MenuForAdmins;
                 case 5:
                     Console.Clear();
                     Customer adminAddingClient = new Customer();
                     adminAddingClient.ClientInsert();
                     System.Console.Write("Would you like to go to regular customer Menu?\n*1*-->Yes\n*2*-->No\nYour choise: ");
                     int choiseAdmin = int.Parse(Console.ReadLine());
-                    if (choiseAdmin == 1){goto MenuForClient;}
-                    else if (choiseAdmin == 2) {goto MenuForAdmins;}
-                break;
+                    if (choiseAdmin == 1) { goto MenuForClient; }
+                    else if (choiseAdmin == 2) { goto MenuForAdmins; }
+                    break;
                 case 6:
-                goto firstMenu;
+                    goto firstMenu;
             }
         HusnoroMenu:
-        System.Console.WriteLine("*1*--> view all Client\n*2*-->view all applications\n*3*-->view all credit history\n*4*--> view mails\n*5*-->sort company\n*6*-->sort ID");
-        int Hchoise = int.Parse(Console.ReadLine());
-        switch (Hchoise)
-        {
-            case 1:
-                register.HSelectFromRegister();
-            goto HusnoroMenu;
-            case 2:
-                register.HSelectFromApplication();
-            goto HusnoroMenu;
-            case 3: 
-                register.HSelectFromCreditHistory();
-            goto HusnoroMenu;
-            case 4:
-                register.HSelectFromConnectingadmin();
-            goto HusnoroMenu;
-        }
+            System.Console.WriteLine("*1*--> view all Client\n*2*-->view all applications\n*3*-->view all credit history\n*4*--> view mails\n*5*-->sort company\n*6*-->sort ID");
+            int Hchoise = int.Parse(Console.ReadLine());
+            switch (Hchoise)
+            {
+                case 1:
+                    register.HSelectFromRegister();
+                    goto HusnoroMenu;
+                case 2:
+                    register.HSelectFromApplication();
+                    goto HusnoroMenu;
+                case 3:
+                    register.HSelectFromCreditHistory();
+                    goto HusnoroMenu;
+                case 4:
+                    register.HSelectFromConnectingadmin();
+                    goto HusnoroMenu;
+                case 5:
+                interMenuForadmin:
+                    System.Console.Write("Whitch company would you like to be admin? ");
+                    string sortCompany1 = Console.ReadLine().ToUpper();
+                    System.Console.WriteLine("*1*--> view all Client\n*2*-->view all applications\n*3*-->view all credit history\n*4*--> view mails\n*5*-->add client\n*6*-->exit");
+                    int adminChoise1 = int.Parse(Console.ReadLine());
+                    switch (adminChoise1)
+                    {
+                        case 1:
+                            Console.Clear();
+                            register.SelectFromRegister(sortCompany1);
+                            goto interMenuForadmin;
+                        case 2:
+                            Console.Clear();
+                            register.SelectFromApplication(sortCompany1);
+                            goto interMenuForadmin;
+                        case 3:
+                            Console.Clear();
+                            register.SelectFromCreditHistory(sortCompany1);
+                            goto interMenuForadmin;
+                        case 4:
+                            Console.Clear();
+                            register.SelectFromConnectingadmin(sortCompany1);
+                            goto interMenuForadmin;
+                        case 5:
+                            Console.Clear();
+                            Customer adminAddingClient = new Customer();
+                            adminAddingClient.ClientInsert();
+                            System.Console.Write("Would you like to go to regular customer Menu?\n*1*-->Yes\n*2*-->No\nYour choise: ");
+                            int choiseAdmin = int.Parse(Console.ReadLine());
+                            if (choiseAdmin == 1) { goto MenuForClient; }
+                            else if (choiseAdmin == 2) { goto interMenuForadmin; }
+                            goto HusnoroMenu;
+                    }
+                    goto HusnoroMenu;
+                case 6:
+                internalMenuForSearchingClient:
+                    System.Console.WriteLine("Inter login you want to search: ");
+                    string systenAdminsearchingLogin = Console.ReadLine();
+                    System.Console.Write("Push *1* --> view personal details\nPush *2* --> view an application history\nPush *3* --> view a credit history\nPush *4*--> view your mails\nPush *5*--> to exit\nYour choise: ");
+                    int choise = int.Parse(Console.ReadLine());
+                    switch (choise)
+                    {
+                        case 1:
+
+                            Console.Clear();
+                            System.Console.WriteLine("****Users delails*****");
+                            register.SelectionByLogin(systenAdminsearchingLogin);
+                            Console.ReadKey();
+                            goto internalMenuForSearchingClient;
+                        case 2:
+                            Console.Clear();
+                            System.Console.WriteLine("****Users applications*****");
+                            register.SelectionByLoginFromApp(systenAdminsearchingLogin);
+                            Console.ReadKey();
+                            goto internalMenuForSearchingClient;
+                        case 3:
+                            Console.Clear();
+                            System.Console.WriteLine("****Users credits*****");
+                            register.SelectionByLoginFromCreditHistory(systenAdminsearchingLogin);
+                            Console.ReadKey();
+                            goto internalMenuForSearchingClient;
+                        case 4:
+                            Console.Clear();
+                            System.Console.WriteLine("****Users mails*****");
+                            register.selectbyLoginfromConnectingadmin(systenAdminsearchingLogin);
+                            goto internalMenuForSearchingClient;
+                        default:
+                            goto HusnoroMenu;
+                    }
+                default:
+                    goto firstMenu;
+            }
         }
     }
 }
