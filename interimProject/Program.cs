@@ -110,7 +110,7 @@ namespace interimProject
                     goto MenuForClient2;
                 case 2:
                     internalMenu:
-                    System.Console.Write("Push *1* --> view personal details\nPush *2* --> view an application history\nPush *3* -->view a credit history\nPush *4*--> to exit\nYour choise: ");
+                    System.Console.Write("Push *1* --> view personal details\nPush *2* --> view an application history\nPush *3* --> view a credit history\n*4*--> view your mails\nPush *5*--> to exit\nYour choise: ");
                     int choise = int.Parse(Console.ReadLine());
                     switch (choise)
                     {
@@ -133,6 +133,11 @@ namespace interimProject
                             register.SelectionByLoginFromCreditHistory(login);
                             Console.ReadKey();
                             goto internalMenu;
+                        case 4:
+                            Console.Clear();
+                            System.Console.WriteLine("****Your mails*****");
+                            register.selectbyLoginfromConnectingadmin(login);
+                        goto internalMenu;
                         default:
                             goto MenuForClient2;                      
                     }

@@ -64,8 +64,10 @@ namespace interimProject
                 }
                 else if (inputLogin == readerForChecking.GetValue(3).ToString() && inputSystemPassword != readerForChecking.GetValue(10).ToString())
                 {
+                    Console.Clear();
                     System.Console.WriteLine("Incorrect Login or systempassword!!!");
                     conForLc.Close();
+                    System.Console.WriteLine("there is no connection. restart the program for correct work!!!");
                     }
             }
             readerForChecking.Close();
@@ -105,6 +107,19 @@ namespace interimProject
                 System.Console.WriteLine($"Credit ID:{reader1.GetValue(1)}\nPurpose:{reader1.GetValue(2)}\nCredit amoung:{reader1.GetValue(3)}\nTerm:{reader1.GetValue(4)}\nDelay:{reader1.GetValue(5)}\nDate of opening:{reader1.GetValue(6)}\nDate of closing:{reader1.GetValue(7)}\nCredit rest:{reader1.GetValue(8)}\nStatus:{reader1.GetValue(9)}");
             }
             reader1.Close();
+        }
+        public void selectbyLoginfromConnectingadmin(string login)
+        {
+            string SelectionByIdCommand = string.Format($"select * from ConnectingAdmin where login = '{login}'");
+            SqlCommand command = new SqlCommand(SelectionByIdCommand, conForLc);
+            SqlDataReader reader1 = command.ExecuteReader();
+
+            while (reader1.Read())
+            {
+                System.Console.WriteLine($"Еhe company you are contacting:{reader1.GetValue(1)}\nYour massage:{reader1.GetValue(2)}");
+            }
+            reader1.Close();
+            
         }
     }
 }
