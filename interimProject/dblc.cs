@@ -18,9 +18,9 @@ namespace interimProject
             {System.Console.WriteLine("Connected successfully!!!");}
             else{System.Console.WriteLine("Ooops, troubles with connection!!!");}
         }
-        public void SelectFromRegister()
+        public void SelectFromRegister(string sortCompany)
         {
-            string commandText = "Select * from Register";
+            string commandText = "Select * from Register where Company = '{sortCompany}'";
             SqlCommand command = new SqlCommand(commandText, conForLc);
             SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
@@ -29,9 +29,9 @@ namespace interimProject
             }
             reader.Close();
         }
-        public void SelectFromApplication()
+        public void SelectFromApplication(string sortCompany)
         {
-            string commandText = "Select * from Application";
+            string commandText = "Select * from Application where Company = '{sortCompany}'";
             SqlCommand command = new SqlCommand(commandText, conForLc);
             SqlDataReader reader1 = command.ExecuteReader();
             while (reader1.Read())
@@ -40,9 +40,9 @@ namespace interimProject
             }
             reader1.Close();
         }
-        public void SelectFromCreditHistory()
+        public void SelectFromCreditHistory(string sortCompany)
         {
-            string commandText = "Select * from CreditHistory";
+            string commandText = "Select * from CreditHistory where Company = '{sortCompany}'";
             SqlCommand command = new SqlCommand(commandText, conForLc);
             SqlDataReader reader1 = command.ExecuteReader();
             while (reader1.Read())
@@ -51,6 +51,18 @@ namespace interimProject
             }
             reader1.Close();
         }
+        public void SelectFromConnectingadmin(string sortCompany)
+        {
+            string commandText = "Select * from ConnectingAdmin where Company = '{sortCompany}'";
+            SqlCommand command = new SqlCommand(commandText, conForLc);
+            SqlDataReader reader1 = command.ExecuteReader();
+            while (reader1.Read())
+            {
+                System.Console.WriteLine($"Login:{reader1.GetValue(0)}\nCredit ID:{reader1.GetValue(1)}\nPurpose:{reader1.GetValue(2)}\nCredit amoung:{reader1.GetValue(3)}\nTerm:{reader1.GetValue(4)}\nDelay:{reader1.GetValue(5)}\nDate of opening:{reader1.GetValue(6)}\nDate of closing:{reader1.GetValue(7)}\nCredit rest:{reader1.GetValue(8)}\nStatus:{reader1.GetValue(9)}");
+            }
+            reader1.Close();
+        }
+        
         public void Checkingidentity(string inputLogin, string inputSystemPassword)
         {
             string checkingcommand = string.Format($"select * from Register");
@@ -65,10 +77,16 @@ namespace interimProject
                 else if (inputLogin == readerForChecking.GetValue(3).ToString() && inputSystemPassword != readerForChecking.GetValue(10).ToString())
                 {
                     Console.Clear();
-                    System.Console.WriteLine("Incorrect Login or systempassword!!!");
-                    conForLc.Close();
+                    System.Console.WriteLine("Incorrect systempassword!!!");
                     System.Console.WriteLine("there is no connection. restart the program for correct work!!!");
-                    }
+                }
+                else if (inputLogin != readerForChecking.GetValue(3).ToString() && inputSystemPassword == readerForChecking.GetValue(10).ToString())
+                {
+                    Console.Clear();
+                    System.Console.WriteLine("Incorrect Login!!!");
+                    System.Console.WriteLine("there is no connection. restart the program for correct work!!!");
+                }
+                
             }
             readerForChecking.Close();
         }

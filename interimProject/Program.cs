@@ -91,7 +91,7 @@ namespace interimProject
 
             }
         MenuForClient:
-            System.Console.Write("Verify your identity! Enter your system login: +");
+            System.Console.Write("Verify your identity!\nEnter your hpone number: +");
             string login = Console.ReadLine();
         MenuForClient2:
             System.Console.WriteLine("Here is your personal account!");
@@ -110,7 +110,7 @@ namespace interimProject
                     goto MenuForClient2;
                 case 2:
                     internalMenu:
-                    System.Console.Write("Push *1* --> view personal details\nPush *2* --> view an application history\nPush *3* --> view a credit history\n*4*--> view your mails\nPush *5*--> to exit\nYour choise: ");
+                    System.Console.Write("Push *1* --> view personal details\nPush *2* --> view an application history\nPush *3* --> view a credit history\nPush *4*--> view your mails\nPush *5*--> to exit\nYour choise: ");
                     int choise = int.Parse(Console.ReadLine());
                     switch (choise)
                     {
@@ -150,23 +150,29 @@ namespace interimProject
 
             }
         MenuForAdmins:
-            System.Console.WriteLine("*1*--> view all Client\n*2*-->view all applications\n*3*-->view all credit history\n*4*-->add client\n*5*-->edit info");
+            System.Console.Write("it is necessary to confirm the administrator of which company you are: ");
+            string sortCompany = Console.ReadLine().ToUpper();
+            System.Console.WriteLine("*1*--> view all Client\n*2*-->view all applications\n*3*-->view all credit history\n*4*--> view mails\n*5*-->add client\n*6*-->exit");
             int adminChoise = int.Parse(Console.ReadLine());
             switch (adminChoise)
             {
                 case 1:
                     Console.Clear();
-                    register.SelectFromRegister();
+                    register.SelectFromRegister(sortCompany);
                 goto MenuForAdmins;
                 case 2:
                     Console.Clear();
-                    register.SelectFromApplication();
+                    register.SelectFromApplication(sortCompany);
                 goto MenuForAdmins;
                 case 3:
                     Console.Clear();
-                    register.SelectFromCreditHistory();
+                    register.SelectFromCreditHistory(sortCompany);
                 goto MenuForAdmins;
                 case 4:
+                    Console.Clear();
+                    register.SelectFromConnectingadmin(sortCompany);
+                goto MenuForAdmins;
+                case 5:
                     Console.Clear();
                     Customer adminAddingClient = new Customer();
                     adminAddingClient.ClientInsert();
@@ -175,8 +181,8 @@ namespace interimProject
                     if (choiseAdmin == 1){goto MenuForClient;}
                     else if (choiseAdmin == 2) {goto MenuForAdmins;}
                 break;
-                case 5:
-                break;
+                case 6:
+                goto firstMenu;
             }
         }
     }

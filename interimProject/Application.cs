@@ -11,7 +11,7 @@ namespace interimProject
         decimal Salary { get; set; }
         public int term { get; set; }
         public decimal creditAmoung { get; set; }
-        public string cCompany {get; set;}
+        public string cCompany { get; set; }
         const string conS = @"Data Source= localhost; Initial Catalog = LoanCalculator; user id= sa; password=Root123.";
         SqlConnection conForLc = new SqlConnection(conS);
         public bool Calculator(string login)
@@ -31,8 +31,8 @@ namespace interimProject
             read.Close();
             System.Console.WriteLine("To apply for a loan, you must fill out the fields!");
             System.Console.Write("Enter your Company: ");
-            string cCompany = Console.ReadLine();
-            this.cCompany=cCompany;
+            string cCompany = Console.ReadLine().ToUpper();
+            this.cCompany = cCompany;
             System.Console.Write("Choose purpose:\n*1* --> Appliances\n*2*-->HomeFix\n*3*-->Phone\n-->smth else\nYour choise:");
             string purpose = Console.ReadLine();
             this.Purpose = purpose;
@@ -77,33 +77,18 @@ namespace interimProject
             else if (delay > 4) { points2 -= 2; }
             else if (delay == 4) { points2--; }
             findreader.Close();
-            if (points2 < 12)
+            if (points2 > 11)
             {
-                string insertingSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term], [resolution], [Company]) values ('{login}', '{Purpose}' ,{Salary}, {creditAmoung}, {term}, 'rejected'), '{cCompany}')");
                 if (ConnectionState.Closed == conForLc.State)
                 { conForLc.Open(); }
-                SqlCommand command = new SqlCommand(insertingSqlCommand, conForLc);
-                var result = command.ExecuteNonQuery();
-
-                Console.WriteLine("Application rejected!!!");
-                Console.ReadKey();
-                return false;
-            }
-            else
-            {
-                string insertingSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term], [resolution], [Company]) values ('{login}', '{Purpose}' ,{Salary}, {creditAmoung}, {term}, 'approved'), '{cCompany}')");
-                if (ConnectionState.Closed == conForLc.State)
-                { conForLc.Open(); }
-                SqlCommand command = new SqlCommand(insertingSqlCommand, conForLc);
+                string insertingAppSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term], [resolution], [Company]) values ('{login}', '{Purpose}' ,{Salary}, {creditAmoung}, {term}, 'approved', '{cCompany}')");
+                SqlCommand command = new SqlCommand(insertingAppSqlCommand, conForLc);
                 var result = command.ExecuteNonQuery();
                 if (result > 0)
                 {
                     System.Console.WriteLine("Credit approved for you!");
                 }
-
                 string insertIntoCreditHistory = string.Format($"insert into CreditHistory ([login],[Purpose],[CreditAmoung],[term],[delay],[OpeningDate],[CreditRest],[status], [Company])values ('{login}','{Purpose}',{creditAmoung},{term},0,'{todayDay}',{creditAmoung},'open',{cCompany})");
-                if (ConnectionState.Closed == conForLc.State)
-                { conForLc.Open(); }                
                 SqlCommand creditHistoryCommand = new SqlCommand(insertIntoCreditHistory, conForLc);
                 var result2 = command.ExecuteNonQuery();
                 if (result2 > 0)
@@ -112,6 +97,20 @@ namespace interimProject
                 }
                 Console.ReadKey();
                 return true;
+            }
+            else
+            {
+                string insertingSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term], [resolution], [Company]) values ('{login}', '{Purpose}' ,{Salary}, {creditAmoung}, {term}, 'rejected'), '{cCompany}')");
+                if (ConnectionState.Closed == conForLc.State)
+                { conForLc.Open(); }
+                SqlCommand command = new SqlCommand(insertingSqlCommand, conForLc);
+                var result2 = command.ExecuteNonQuery();
+                if (result2 > 0)
+                {
+                    Console.WriteLine("Application rejected!!!");
+                }
+                Console.ReadKey();
+                return false;
             }
 
 
