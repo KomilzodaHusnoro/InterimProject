@@ -65,6 +65,7 @@ namespace interimProject
                 else if (inputLogin == readerForChecking.GetValue(3).ToString() && inputSystemPassword != readerForChecking.GetValue(10).ToString())
                 {
                     System.Console.WriteLine("Incorrect Login or systempassword!!!");
+                    conForLc.Close();
                     }
             }
             readerForChecking.Close();

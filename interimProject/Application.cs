@@ -79,7 +79,7 @@ namespace interimProject
             findreader.Close();
             if (points2 < 12)
             {
-                string insertingSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term], [resolution], [cCompany]) values ('{login}', '{Purpose}' ,{Salary}, {creditAmoung}, {term}, 'rejected'), '{cCompany}'");
+                string insertingSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term], [resolution], [Company]) values ('{login}', '{Purpose}' ,{Salary}, {creditAmoung}, {term}, 'rejected'), '{cCompany}')");
                 if (ConnectionState.Closed == conForLc.State)
                 { conForLc.Open(); }
                 SqlCommand command = new SqlCommand(insertingSqlCommand, conForLc);
@@ -91,7 +91,7 @@ namespace interimProject
             }
             else
             {
-                string insertingSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term], [resolution]) values ('{login}', '{Purpose}' ,{Salary}, {creditAmoung}, {term}, 'approved')");
+                string insertingSqlCommand = string.Format($"insert into Application ([login],[Purpose],[Salary],[creditAmoung],[term], [resolution], [Company]) values ('{login}', '{Purpose}' ,{Salary}, {creditAmoung}, {term}, 'approved'), '{cCompany}')");
                 if (ConnectionState.Closed == conForLc.State)
                 { conForLc.Open(); }
                 SqlCommand command = new SqlCommand(insertingSqlCommand, conForLc);
@@ -101,7 +101,7 @@ namespace interimProject
                     System.Console.WriteLine("Credit approved for you!");
                 }
 
-                string insertIntoCreditHistory = string.Format($"insert into CreditHistory ([login],[Purpose],[CreditAmoung],[term],[delay],[OpeningDate],[CreditRest],[status])values ('{login}','{Purpose}',{creditAmoung},{term},0,'{todayDay}',{creditAmoung},'open')");
+                string insertIntoCreditHistory = string.Format($"insert into CreditHistory ([login],[Purpose],[CreditAmoung],[term],[delay],[OpeningDate],[CreditRest],[status], [Company])values ('{login}','{Purpose}',{creditAmoung},{term},0,'{todayDay}',{creditAmoung},'open',{cCompany})");
                 if (ConnectionState.Closed == conForLc.State)
                 { conForLc.Open(); }                
                 SqlCommand creditHistoryCommand = new SqlCommand(insertIntoCreditHistory, conForLc);

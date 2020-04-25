@@ -56,7 +56,7 @@ namespace interimProject
             else if (2020 - cBirthDate > 35 && 2020 - cBirthDate < 63) { points += 2; }
             else if (2020 - cBirthDate >= 63) { points ++; }
             System.Console.Write("Enter your company: ");
-            cCompany = Console.ReadLine();
+            cCompany = Console.ReadLine().ToUpper();
             this.cCompany=cCompany;
             System.Console.Write($"Create system-password: ");
             cSystemPassword = Console.ReadLine();

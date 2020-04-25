@@ -27,7 +27,7 @@ namespace interimProject
             string aPassportID = Console.ReadLine();
             this.aPassportID = aPassportID;
             System.Console.WriteLine("Enter your company: ");
-            string aCompany = Console.ReadLine();
+            string aCompany = Console.ReadLine().ToUpper();
             this.aCompany = aCompany;
             System.Console.Write("Create system-password:");
             string aSystemPassword = Console.ReadLine();
