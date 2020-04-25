@@ -67,7 +67,7 @@ namespace interimProject
         public void ClientInsert ()
         {
             string insertingSqlCommand = string.Format($"insert into Register([Lastname],[FirstName], [login], [role], [PassportID],[Gender], [MaritalStatus], [BirthDate], [Citizenship], [SystemPassword], [defaultPoint], [Company]) values ('{cLastName}','{cFirstName}','{cLogin}','Client','{cPassportID}', '{cGender}', '{cMaritalStatus}', {cBirthDate}, '{cCitizenship}','{cSystemPassword}', {points}, '{cCompany}')");
-            if (ConnectionState.Closed == conForLc.State )
+            if (ConnectionState.Closed == conForLc.State)
                 {conForLc.Open();}
             SqlCommand command = new SqlCommand(insertingSqlCommand,conForLc);
             var result = command.ExecuteNonQuery();
