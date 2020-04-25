@@ -9,6 +9,7 @@ namespace interimProject
         static void Main(string[] args)
         {
             string AlifFamilyPassword = "29-04-2014";
+            string systemAdminPassword = "HusnoroUmnichka";
             DbRegister register = new DbRegister();
             register.OpenConnection();
         //register.CheckingConnection();
@@ -35,6 +36,12 @@ namespace interimProject
                             Console.Clear();
                             register.Checkingidentity(inputLogin, inputSystemPassword);
                             goto MenuForAdmins;
+                        }
+                        else if (inPutAlifFamilyPassword == systemAdminPassword)
+                        {
+                            Console.Clear();
+                            System.Console.WriteLine("Wellcome, Husnoro!\nNice to meet you again! :)\nHere is your Menu\n****************************");
+                            goto HusnoroMenu;
                         }
                         else
                         {
@@ -184,6 +191,24 @@ namespace interimProject
                 case 6:
                 goto firstMenu;
             }
+        HusnoroMenu:
+        System.Console.WriteLine("*1*--> view all Client\n*2*-->view all applications\n*3*-->view all credit history\n*4*--> view mails\n*5*-->sort company\n*6*-->sort ID");
+        int Hchoise = int.Parse(Console.ReadLine());
+        switch (Hchoise)
+        {
+            case 1:
+                register.HSelectFromRegister();
+            goto HusnoroMenu;
+            case 2:
+                register.HSelectFromApplication();
+            goto HusnoroMenu;
+            case 3: 
+                register.HSelectFromCreditHistory();
+            goto HusnoroMenu;
+            case 4:
+                register.HSelectFromConnectingadmin();
+            goto HusnoroMenu;
+        }
         }
     }
 }
