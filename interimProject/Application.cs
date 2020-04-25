@@ -8,9 +8,9 @@ namespace interimProject
     {
         public string login { get; set; }
         string Purpose { get; set; }
-        int Salary { get; set; }
+        decimal Salary { get; set; }
         public int term { get; set; }
-        public int creditAmoung { get; set; }
+        public decimal creditAmoung { get; set; }
         const string conS = @"Data Source= localhost; Initial Catalog = LoanCalculator; user id= sa; password=Root123.";
         SqlConnection conForLc = new SqlConnection(conS);
         public bool Calculator(string login)
@@ -36,11 +36,11 @@ namespace interimProject
             else if (purpose == "2") {purpose = "Phone"; points2++;}
             else if (purpose == "3") {purpose= "Phone"; points2--;; }
             System.Console.Write("Enter Credit amoung: ");
-            int creditAmoung = int.Parse(Console.ReadLine());
+            decimal creditAmoung = decimal.Parse(Console.ReadLine());
             this.creditAmoung = creditAmoung;
             money:
             System.Console.Write("Enter your month salary: ");
-            int salary = int.Parse(Console.ReadLine());
+            decimal salary = decimal.Parse(Console.ReadLine());
             if (salary == 0) { System.Console.WriteLine("You should earn money to pay a credit fee!"); goto money; }
             this.Salary = salary;
             System.Console.Write("Enter term (MM): ");
